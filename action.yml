@@ -1,0 +1,14 @@
+name: Creations Stats
+description: A Github Action that generates user's creations (Repositories and Gists). Perfect for profile readme customization!
+
+inputs:
+  test-in:
+    desc: hi
+
+outputs:
+  test-out:
+    desc: hello
+
+runs:
+  using: node24
+  main: index.ts
