@@ -11,4 +11,4 @@ outputs:
 
 runs:
   using: node24
-  main: index.ts
+  main: dist/index.js
