@@ -14,7 +14,7 @@ jobs:
 
       - name: test step
         id: test
-        uses: ArsenTech/creations-stats-workflow@v1
+        uses: ./
         with:
           test-in: hi
 
