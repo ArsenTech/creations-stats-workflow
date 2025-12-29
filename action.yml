@@ -3,11 +3,11 @@ description: A Github Action that generates user's creations (Repositories and G
 
 inputs:
   test-in:
-    desc: hi
+    description: hi
 
 outputs:
   test-out:
-    desc: hello
+    description: hello
 
 runs:
   using: node24
