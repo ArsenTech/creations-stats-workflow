@@ -1,0 +1,3 @@
+*.config.*     @ArsenTech
+tsconfig.json  @ArsenTech
+.gitignore     @ArsenTech
