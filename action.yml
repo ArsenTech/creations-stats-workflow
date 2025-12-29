@@ -1,5 +1,5 @@
 name: Creations Stats
-description: A Github Action that generates user's creations (Repositories and Gists). Perfect for profile readme customization!
+description: A Github Action that generates user's creations stats (Repositories and Gists). Perfect for profile readme customization!
 
 inputs:
   test-in:
