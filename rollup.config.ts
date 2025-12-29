@@ -15,7 +15,6 @@ const config = {
           }),
           nodeResolve({
                preferBuiltins: true,
-               modulesOnly: true
           })
      ],
      external: ["@actions/core","@actions/github"]
