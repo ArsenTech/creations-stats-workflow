@@ -31841,7 +31841,7 @@ async function run() {
     const showForks = core.getBooleanInput("show-forks");
     const showGistStargazers = core.getBooleanInput("show-gist-stargazers");
     const commitMessage = core.getInput("commit-message");
-    const exclusions = exclusionsTxt.split("|").map(repoName => repoName.trim());
+    const exclusions = new Set(exclusionsTxt.split("|").map(repoName => repoName.trim()));
     const octokit = new dist_src_Octokit({
         auth: process.env.GITHUB_TOKEN
     });
@@ -31849,8 +31849,8 @@ async function run() {
         username,
         per_page: parseInt(repoLimit)
     });
-    const repos = data.filter(repo => !repo.disabled).map(repo => {
-        const { name, html_url, description, fork, forks_count, stargazers_count, watchers_count, language, forks, archived, license, visibility } = repo;
+    const repos = data.filter(repo => !repo.disabled && !repo.private).map(repo => {
+        const { name, html_url, description, fork, forks_count, stargazers_count, watchers_count, language, archived, license, visibility } = repo;
         return {
             name,
             html_url,
@@ -31860,12 +31860,11 @@ async function run() {
             stargazers_count,
             watchers_count,
             language,
-            forks,
             archived,
             license,
             visibility
         };
-    });
+    }).filter(repo => repo.fork === showForks || repo.archived === showArchives || !exclusions.has(repo.name));
     core.info(JSON.stringify(repos, undefined, 2));
 }
 try {
