@@ -31878,7 +31878,7 @@ async function fetchData() {
         stars: repo.stargazers_count,
         watchers: repo.watchers_count,
         archived: repo.archived,
-        license: repo.license,
+        license: repo.license?.name || "Unlicensed",
     })).filter(repo => {
         if (!showArchives && repo.archived)
             return false;
@@ -31940,13 +31940,26 @@ function commitAndPush() {
     (0,external_child_process_.execSync)(`git commit -m "${commitMessage}"`);
     (0,external_child_process_.execSync)("git push");
 }
+function makeList(val, type) {
+    if (type === "minimal")
+        return `- [${val.name}](${val.url}) - ⭐ ${val.stars} - ${val.description}`;
+    return `- [${val.name}](${val.url})
+     - ${val.description}
+     - ⚖️ ${val.license}
+     - ⭐ Stargazers: ${val.stars}
+     - 🍴 Forks: ${val.forks}
+     - 👀 Watchers: ${val.watchers}\n`;
+}
 
 ;// CONCATENATED MODULE: ./src/index.ts
 
 
 async function run() {
+    const repoListDesign = core.getInput("repo-list-design");
+    if (repoListDesign !== "minimal" && repoListDesign !== "detailed")
+        errorMessage('Repo List design should be either "minimal" or "detailed"');
     const data = await fetchData();
-    let markdown = `#### Repositories\n${data.repositories.map(val => `- [${val.name}](${val.url}) - ⭐ ${val.stars} - ${val.description}`).join("\n")}\n`;
+    let markdown = `#### Repositories\n${data.repositories.map(val => makeList(val, repoListDesign)).join("\n")}\n`;
     if (data.gists !== null) {
         markdown += `\n#### Gists\n${data.gists.map(val => `- [${val.description}](${val.url})`).join("\n")}`;
     }

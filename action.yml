@@ -36,6 +36,10 @@ inputs:
     description: Include gists created by the mentioned github user
     default: true
     required: false
+  repo-list-design:
+    description: Repository list design (either minimal or detailed)
+    default: minimal
+    required: false
 
 outputs:
   results:

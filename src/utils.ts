@@ -6,7 +6,7 @@ import * as path from "path";
 import {execSync} from "child_process"
 
 const sleep = (ms: number) => new Promise(res=>setTimeout(res,ms));
-function errorMessage(msg: string): never {
+export function errorMessage(msg: string): never {
      core.error(msg)
      return process.exit(1);
 }
@@ -47,7 +47,7 @@ export async function fetchData(): Promise<IResult>{
           stars: repo.stargazers_count,
           watchers: repo.watchers_count,
           archived: repo.archived,
-          license: repo.license,
+          license: repo.license?.name || "Unlicensed",
      })).filter(repo=>{
           if(!showArchives && repo.archived) return false;
           if(!showForks && repo.fork) return false;
@@ -118,4 +118,14 @@ export function commitAndPush(){
      execSync(`git add "${targetFile}"`);
      execSync(`git commit -m "${commitMessage}"`);
      execSync("git push");
+}
+export function makeList(val: IGitRepo, type: "minimal" | "detailed"){
+     if(type==="minimal")
+          return `- [${val.name}](${val.url}) - ⭐ ${val.stars} - ${val.description}`;
+     return `- [${val.name}](${val.url})
+     - ${val.description}
+     - ⚖️ ${val.license}
+     - ⭐ Stargazers: ${val.stars}
+     - 🍴 Forks: ${val.forks}
+     - 👀 Watchers: ${val.watchers}\n`
 }
