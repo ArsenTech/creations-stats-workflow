@@ -12,11 +12,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: test step
-        id: test
+      - name: Main Step to test the action
         uses: ./
         with:
-          test-in: hi
-
-      - name: Get the output
-        run: echo "${{ steps.test }}"
+          github-username: ArsenTech
+          exclusions: ArsenTech | source-codes
+          target-file: test.md

@@ -2,12 +2,46 @@ name: Creations Stats
 description: A Github Action that generates user's creations stats (Repositories and Gists). Perfect for profile readme customization!
 
 inputs:
-  test-in:
-    description: hi
+  github-username:
+    description: A Github username to show gists and Repositories
+    required: true
+    default: ""
+  exclusions:
+    description: Repos to exclude from showing it
+    required: false
+    default: ""
+  target-file:
+    description: Target markdown file to place in the repo
+    default: README.md
+    required: false
+  repo-limit:
+    description: Limits how many repos to show
+    default: '20'
+    required: false
+  gist-limit:
+    description: Limits how many gists to show
+    default: '10'
+    required: false
+  show-archives:
+    description: Option to show archived Repositories
+    default: false
+    required: false
+  show-forks:
+    description: Option to show forked Repositories
+    default: false
+    required: false
+  commit-message:
+    description: A custom commit message
+    default: Update repos and gists stats
+    required: false
+  show-gist-stargazers:
+    description: Option to show stars count on Gists
+    default: true
+    required: false
 
 outputs:
-  test-out:
-    description: hello
+  results:
+    description: JSON list containing repos and gists list
 
 runs:
   using: node20
