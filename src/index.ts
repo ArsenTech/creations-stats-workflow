@@ -13,9 +13,7 @@ async function run(){
 }
 
 try{
-     fetchData().then(data=>{
-          core.info(JSON.stringify(data,undefined,2))
-     }).catch(error=>{
+     run().catch(error=>{
           core.setFailed(`Creations stats job failed: ${error.message}`)
           process.exit(1)
      })

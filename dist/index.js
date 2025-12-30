@@ -31840,7 +31840,7 @@ var external_child_process_ = __nccwpck_require__(5317);
 
 
 
-async function utils_fetchData() {
+async function fetchData() {
     const username = lib_core.getInput("github-username");
     const exclusionsTxt = lib_core.getInput("exclusions");
     const repoLimit = lib_core.getInput("repo-limit");
@@ -31932,12 +31932,10 @@ async function run() {
         markdown.concat(`#### Gists
           ${data.gists.map(val => `- (${val.description})[${val.url}]`).join("\n")}`);
     }
-    core.info(markdown);
+    lib_core.info(markdown);
 }
 try {
-    utils_fetchData().then(data => {
-        lib_core.info(JSON.stringify(data, undefined, 2));
-    }).catch(error => {
+    run().catch(error => {
         lib_core.setFailed(`Creations stats job failed: ${error.message}`);
         process.exit(1);
     });
