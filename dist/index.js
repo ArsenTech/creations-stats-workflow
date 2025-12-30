@@ -31926,9 +31926,9 @@ function commitAndPush() {
 
 async function run() {
     const data = await fetchData();
-    const markdown = `#### Repositories\n${data.repositories.map(val => `- [${val.name}](${val.url}) - ⭐ ${val.stars} - ${val.description}`).join("\n")}\n`;
+    let markdown = `#### Repositories\n${data.repositories.map(val => `- [${val.name}](${val.url}) - ⭐ ${val.stars} - ${val.description}`).join("\n")}\n`;
     if (data.gists !== null) {
-        markdown.concat(`\n#### Gists\n${data.gists.map(val => `- (${val.description})[${val.url}]`).join("\n")}`);
+        markdown += `\n#### Gists\n${data.gists.map(val => `- [${val.description}](${val.url})`).join("\n")}`;
     }
     lib_core.info(markdown);
 }
