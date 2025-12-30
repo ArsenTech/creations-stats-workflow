@@ -31849,7 +31849,24 @@ async function run() {
         username,
         per_page: parseInt(repoLimit)
     });
-    core.info(JSON.stringify(data, undefined, 2));
+    const repos = data.filter(repo => !repo.disabled).map(repo => {
+        const { name, html_url, description, fork, forks_count, stargazers_count, watchers_count, language, forks, archived, license, visibility } = repo;
+        return {
+            name,
+            html_url,
+            description,
+            fork,
+            forks_count,
+            stargazers_count,
+            watchers_count,
+            language,
+            forks,
+            archived,
+            license,
+            visibility
+        };
+    });
+    core.info(JSON.stringify(repos, undefined, 2));
 }
 try {
     run().catch(error => {
