@@ -76,13 +76,13 @@ export function placeContent(generatedContent: string){
      fs.writeFileSync(filePath, updated, "utf8");
 }
 
-export function commitAndPush(){
+export function commitAndPush(githubToken?: string){
      const commitMessage = core.getInput("commit-message");
      const targetFile = core.getInput("target-file");
      exec("git config --global user.email github-actions@github.com");
-     if (process.env.GITHUB_TOKEN)
-          exec(`git remote set-url origin https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
-     core.info(`https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`)
+     if (githubToken)
+          exec(`git remote set-url origin https://${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+     core.info(`https://${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`)
      exec("git diff --quiet",(error)=>{
           if(!error){
                core.info("No changes to commit");

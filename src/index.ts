@@ -8,7 +8,7 @@ async function run(){
           markdown += `\n#### Gists\n${data.gists.map(val=>`- [${val.description}](${val.url})`).join("\n")}`;
      }
      placeContent(markdown);
-     commitAndPush();
+     commitAndPush(process.env.GITHUB_TOKEN);
 }
 
 try{

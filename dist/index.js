@@ -31900,13 +31900,13 @@ function placeContent(generatedContent) {
         `\n\n${after}`;
     external_fs_.writeFileSync(filePath, updated, "utf8");
 }
-function commitAndPush() {
+function commitAndPush(githubToken) {
     const commitMessage = core.getInput("commit-message");
     const targetFile = core.getInput("target-file");
     (0,external_child_process_.exec)("git config --global user.email github-actions@github.com");
-    if (process.env.GITHUB_TOKEN)
-        (0,external_child_process_.exec)(`git remote set-url origin https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
-    core.info(`https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+    if (githubToken)
+        (0,external_child_process_.exec)(`git remote set-url origin https://${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+    core.info(`https://${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
     (0,external_child_process_.exec)("git diff --quiet", (error) => {
         if (!error) {
             core.info("No changes to commit");
@@ -31932,7 +31932,7 @@ async function run() {
         markdown += `\n#### Gists\n${data.gists.map(val => `- [${val.description}](${val.url})`).join("\n")}`;
     }
     placeContent(markdown);
-    commitAndPush();
+    commitAndPush(process.env.GITHUB_TOKEN);
 }
 try {
     run().catch(error => {
