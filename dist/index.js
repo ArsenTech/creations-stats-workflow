@@ -31876,7 +31876,6 @@ async function fetchData() {
         fork: repo.fork,
         forks: repo.forks,
         stars: repo.stargazers_count,
-        watchers: repo.watchers,
         archived: repo.archived,
         license: repo.license?.name || "Unlicensed",
     })).filter(repo => {
@@ -31946,8 +31945,7 @@ function makeList(val, type) {
     return `- [${val.name}](${val.url}) - ${val.description}
      - ⚖️ ${val.license}
      - ⭐ Stargazers: ${val.stars}
-     - 🍴 Forks: ${val.forks}
-     - 👀 Watchers: ${val.watchers}\n`;
+     - 🍴 Forks: ${val.forks}\n`;
 }
 
 ;// CONCATENATED MODULE: ./src/index.ts

@@ -5,7 +5,6 @@ export interface IGitRepo {
     fork: boolean;
     forks?: number;
     stars?: number;
-    watchers?: number;
     archived?: boolean;
     license: string;
 }
