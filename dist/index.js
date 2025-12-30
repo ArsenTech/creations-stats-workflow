@@ -31840,7 +31840,7 @@ var external_child_process_ = __nccwpck_require__(5317);
 
 
 
-async function fetchData() {
+async function fetchData(githubToken) {
     const username = core.getInput("github-username");
     const exclusionsTxt = core.getInput("exclusions");
     const repoLimit = core.getInput("repo-limit");
@@ -31849,7 +31849,7 @@ async function fetchData() {
     const showForks = core.getBooleanInput("show-forks");
     const includeGists = core.getBooleanInput("include-gists");
     const exclusions = new Set(exclusionsTxt.split("|").map(repoName => repoName.trim()));
-    const octokit = new dist_src_Octokit({ auth: process.env.GITHUB_TOKEN });
+    const octokit = new dist_src_Octokit({ auth: githubToken });
     const { data: repoData } = await octokit.repos.listForUser({
         username,
         per_page: parseInt(repoLimit)
@@ -31926,13 +31926,14 @@ function commitAndPush(githubToken) {
 
 
 async function run() {
-    const data = await fetchData();
+    const githubToken = process.env.GITHUB_TOKEN;
+    const data = await fetchData(githubToken);
     let markdown = `#### Repositories\n${data.repositories.map(val => `- [${val.name}](${val.url}) - ⭐ ${val.stars} - ${val.description}`).join("\n")}\n`;
     if (data.gists !== null) {
         markdown += `\n#### Gists\n${data.gists.map(val => `- [${val.description}](${val.url})`).join("\n")}`;
     }
     placeContent(markdown);
-    commitAndPush(process.env.GITHUB_TOKEN);
+    commitAndPush(githubToken);
 }
 try {
     run().catch(error => {

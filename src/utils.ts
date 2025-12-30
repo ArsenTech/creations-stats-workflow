@@ -5,7 +5,7 @@ import * as fs from "fs";
 import * as path from "path";
 import {exec} from "child_process"
 
-export async function fetchData(): Promise<IResult>{
+export async function fetchData(githubToken?: string): Promise<IResult>{
      const username = core.getInput("github-username");
      const exclusionsTxt = core.getInput("exclusions");
      const repoLimit = core.getInput("repo-limit");
@@ -15,7 +15,7 @@ export async function fetchData(): Promise<IResult>{
      const includeGists = core.getBooleanInput("include-gists");
 
      const exclusions = new Set(exclusionsTxt.split("|").map(repoName=>repoName.trim()));
-     const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
+     const octokit = new Octokit({ auth: githubToken })
 
      const {data: repoData} = await octokit.repos.listForUser({
           username,
