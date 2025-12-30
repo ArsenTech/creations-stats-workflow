@@ -9,6 +9,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Made Github Username, Exclusions, and Target file into GitHub Action options
 - Rewritten the code from Bash (prototype) to Typescript with some types and utilities
 - Updated the fetch function
+### Improved
+- Feature to add contents in between 2 comment tags
+- Feature To Fetch Repos and Gists
 ### Added
 - The **Detailed** Repo list item design
 - Raw value validation
@@ -28,3 +31,4 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Added
 - Feature To Fetch Repos and Gists
 - The **Minimal** Repo list item design
+- Feature to add contents in between 2 comment tags
