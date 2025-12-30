@@ -23,4 +23,4 @@ jobs:
           github-username: ArsenTech
           exclusions: ArsenTech | source-codes
           target-file: test.md
-          repo-limit: -5
+          gist-limit: -5
