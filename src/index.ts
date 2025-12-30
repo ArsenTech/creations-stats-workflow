@@ -48,8 +48,8 @@ async function run(){
                license,
           }
      }).filter(repo=>
-          repo.fork===showForks ||
-          repo.archived===showArchives
+          (showForks && repo.fork) ||
+          (showArchives && repo.archived)
      );
 
      core.info(JSON.stringify(repos,undefined,2))
