@@ -31849,7 +31849,7 @@ async function fetchData() {
     const showForks = core.getBooleanInput("show-forks");
     const includeGists = core.getBooleanInput("include-gists");
     const exclusions = new Set(exclusionsTxt.split("|").map(repoName => repoName.trim()));
-    const octokit = new dist_src_Octokit({ auth: process.env.GITHUB_TOKEN });
+    const octokit = new dist_src_Octokit({ auth: core.getInput("github-token") || process.env.GITHUB_TOKEN });
     const { data: repoData } = await octokit.repos.listForUser({
         username,
         per_page: parseInt(repoLimit)
@@ -31872,15 +31872,20 @@ async function fetchData() {
         return true;
     });
     if (includeGists) {
-        const { data: gistData } = await octokit.gists.listForUser({
-            username,
-            per_page: parseInt(gistLimit)
-        });
-        const gists = gistData.filter(gist => gist.public).map(gist => ({
-            url: gist.html_url,
-            description: gist.description || "Untitled gist"
-        }));
-        return { repositories: repos, gists };
+        try {
+            const { data: gistData } = await octokit.gists.listForUser({
+                username,
+                per_page: parseInt(gistLimit)
+            });
+            const gists = gistData.filter(gist => gist.public).map(gist => ({
+                url: gist.html_url,
+                description: gist.description || "Untitled gist"
+            }));
+            return { repositories: repos, gists };
+        }
+        catch {
+            core.warning("Could not fetch gists (token lacks permission)");
+        }
     }
     return { repositories: repos, gists: null };
 }
@@ -31903,9 +31908,10 @@ function placeContent(generatedContent) {
 function commitAndPush() {
     const commitMessage = core.getInput("commit-message");
     const targetFile = core.getInput("target-file");
+    const ghToken = core.getInput("github-token") || process.env.GITHUB_TOKEN;
     (0,external_child_process_.exec)("git config --global user.email github-actions@github.com");
-    if (process.env.GITHUB_TOKEN)
-        (0,external_child_process_.exec)(`git remote set-url origin https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+    if (ghToken)
+        (0,external_child_process_.exec)(`git remote set-url origin https://${ghToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
     (0,external_child_process_.exec)("git diff --quiet", (error) => {
         if (!error) {
             core.info("No changes to commit");

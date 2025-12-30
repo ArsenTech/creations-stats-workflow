@@ -37,8 +37,8 @@ inputs:
     default: true
     required: false
   github-token:
-    description: A Github Token to make the workflow work;
-    required: true
+    description: A Github Token to make the workflow work
+    required: false
 
 outputs:
   results:
