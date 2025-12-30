@@ -31863,8 +31863,13 @@ async function run() {
             archived,
             license,
         };
-    }).filter(repo => (showForks && repo.fork) ||
-        (showArchives && repo.archived));
+    }).filter(repo => {
+        if (!showArchives && repo.archived)
+            return false;
+        if (!showForks && repo.fork)
+            return false;
+        return true;
+    });
     core.info(JSON.stringify(repos, undefined, 2));
 }
 try {
