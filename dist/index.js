@@ -31831,7 +31831,7 @@ const dist_src_Octokit = Octokit.plugin(requestLog, legacyRestEndpointMethods, p
 ;// CONCATENATED MODULE: ./src/index.ts
 
 
-async function run() {
+async function fetchData() {
     const username = core.getInput("github-username");
     const exclusionsTxt = core.getInput("exclusions");
     const targetFile = core.getInput("target-file");
@@ -31839,27 +31839,26 @@ async function run() {
     const gistLimit = core.getInput("gist-limit");
     const showArchives = core.getBooleanInput("show-archives");
     const showForks = core.getBooleanInput("show-forks");
-    const showGistStargazers = core.getBooleanInput("show-gist-stargazers");
     const commitMessage = core.getInput("commit-message");
+    const includeGists = core.getBooleanInput("include-gists");
     const exclusions = new Set(exclusionsTxt.split("|").map(repoName => repoName.trim()));
     const octokit = new dist_src_Octokit({
         auth: process.env.GITHUB_TOKEN
     });
-    const { data } = await octokit.repos.listForUser({
+    const { data: repoData } = await octokit.repos.listForUser({
         username,
         per_page: parseInt(repoLimit)
     });
-    const repos = data.filter(repo => !repo.disabled && !repo.private && !exclusions.has(repo.name)).map(repo => {
-        const { name, html_url, description, fork, forks_count, stargazers_count, watchers_count, language, archived, license, } = repo;
+    const repos = repoData.filter(repo => !repo.disabled && !repo.private && !exclusions.has(repo.name)).map(repo => {
+        const { name, html_url, description, fork, forks_count, stargazers_count, watchers_count, archived, license, } = repo;
         return {
             name,
-            html_url,
-            description,
+            url: html_url,
+            description: description || "No Description",
             fork,
-            forks_count,
-            stargazers_count,
-            watchers_count,
-            language,
+            forks: forks_count,
+            stars: stargazers_count,
+            watchers: watchers_count,
             archived,
             license,
         };
@@ -31870,10 +31869,29 @@ async function run() {
             return false;
         return true;
     });
-    core.info(JSON.stringify(repos, undefined, 2));
+    if (includeGists) {
+        const { data: gistData } = await octokit.gists.listForUser({
+            username,
+            per_page: parseInt(gistLimit)
+        });
+        const gists = gistData.filter(gist => gist.public).map(gist => ({
+            url: gist.html_url,
+            description: gist.description
+        }));
+        return {
+            repositories: repos,
+            gists
+        };
+    }
+    return {
+        repositories: repos,
+        gists: null
+    };
 }
 try {
-    run().catch(error => {
+    fetchData().then(data => {
+        core.info(JSON.stringify(data, undefined, 2));
+    }).catch(error => {
         core.setFailed(`Creations stats job failed: ${error.message}`);
         process.exit(1);
     });

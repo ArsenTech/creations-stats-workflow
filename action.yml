@@ -34,8 +34,8 @@ inputs:
     description: A custom commit message
     default: Update repos and gists stats
     required: false
-  show-gist-stargazers:
-    description: Option to show stars count on Gists
+  include-gists:
+    description: Include gists created by the mentioned github user
     default: true
     required: false
 
