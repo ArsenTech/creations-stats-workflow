@@ -82,7 +82,6 @@ export function commitAndPush(githubToken?: string){
      exec("git config --global user.email github-actions@github.com");
      if (githubToken)
           exec(`git remote set-url origin https://${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
-     core.info(`https://${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`)
      exec("git diff --quiet",(error)=>{
           if(!error){
                core.info("No changes to commit");

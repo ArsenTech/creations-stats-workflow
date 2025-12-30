@@ -31906,7 +31906,6 @@ function commitAndPush(githubToken) {
     (0,external_child_process_.exec)("git config --global user.email github-actions@github.com");
     if (githubToken)
         (0,external_child_process_.exec)(`git remote set-url origin https://${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
-    core.info(`https://${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
     (0,external_child_process_.exec)("git diff --quiet", (error) => {
         if (!error) {
             core.info("No changes to commit");
