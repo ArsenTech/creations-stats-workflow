@@ -3,13 +3,13 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
-
 jobs:
   creations_stats_job:
     name: A Test Job
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
