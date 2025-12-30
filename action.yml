@@ -39,7 +39,7 @@ inputs:
 
 outputs:
   results:
-    description: JSON list containing repos and gists list
+    description: A markdown list containing repos and gists list into the target Markdown file (e.g. README.md)
 
 runs:
   using: node20
