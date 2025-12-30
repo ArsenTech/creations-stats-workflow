@@ -12,40 +12,26 @@ async function fetchData(): Promise<IResult>{
      const showForks = core.getBooleanInput("show-forks");
      const commitMessage = core.getInput("commit-message");
      const includeGists = core.getBooleanInput("include-gists");
+
      const exclusions = new Set(exclusionsTxt.split("|").map(repoName=>repoName.trim()));
-     const octokit = new Octokit({
-          auth: process.env.GITHUB_TOKEN
-     })
+     const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
      const {data: repoData} = await octokit.repos.listForUser({
           username,
           per_page: parseInt(repoLimit)
      })
 
-     const repos: IGitRepo[] = repoData.filter(repo=>!repo.disabled && !repo.private && !exclusions.has(repo.name)).map(repo=>{
-          const {
-               name,
-               html_url,
-               description,
-               fork,
-               forks_count,
-               stargazers_count,
-               watchers_count,
-               archived,
-               license,
-          } = repo
-          return {
-               name,
-               url: html_url,
-               description: description || "No Description",
-               fork,
-               forks: forks_count,
-               stars: stargazers_count,
-               watchers: watchers_count,
-               archived,
-               license,
-          }
-     }).filter(repo=>{
+     const repos: IGitRepo[] = repoData.filter(repo=>!repo.disabled && !repo.private && !exclusions.has(repo.name)).map(repo=>({
+          name: repo.name,
+          url: repo.html_url,
+          description: repo.description || "No Description",
+          fork: repo.fork,
+          forks: repo.forks_count,
+          stars: repo.stargazers_count,
+          watchers: repo.watchers_count,
+          archived: repo.archived,
+          license: repo.license,
+     })).filter(repo=>{
           if(!showArchives && repo.archived) return false;
           if(!showForks && repo.fork) return false;
           return true
@@ -58,18 +44,11 @@ async function fetchData(): Promise<IResult>{
           });
           const gists: IGitGist[] = gistData.filter(gist=>gist.public).map(gist=>({
                url: gist.html_url,
-               description: gist.description
+               description: gist.description || "Untitled gist"
           }))
-          return {
-               repositories: repos,
-               gists
-          }
+          return { repositories: repos, gists }
      }
-
-     return {
-          repositories: repos,
-          gists: null
-     }
+     return { repositories: repos, gists: null }
 }
 
 try{

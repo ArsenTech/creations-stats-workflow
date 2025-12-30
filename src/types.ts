@@ -18,7 +18,7 @@ export interface IGitRepo{
 
 export interface IGitGist{
      url: string;
-     description: string | null;
+     description: string;
 }
 
 export interface IResult{
