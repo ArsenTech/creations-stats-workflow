@@ -9,7 +9,7 @@ try{
      const gistLimit = core.getInput("gist-limit");
      const showArchives = core.getBooleanInput("show-archives");
      const showForks = core.getBooleanInput("show-forks");
-     const showGistStargazers = core.getInput("show-gist-stargazers");
+     const showGistStargazers = core.getBooleanInput("show-gist-stargazers");
      const commitMessage = core.getInput("commit-message");
      core.info(JSON.stringify({
           username,

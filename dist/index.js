@@ -27705,7 +27705,7 @@ try {
     const gistLimit = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("gist-limit");
     const showArchives = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getBooleanInput("show-archives");
     const showForks = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getBooleanInput("show-forks");
-    const showGistStargazers = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("show-gist-stargazers");
+    const showGistStargazers = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getBooleanInput("show-gist-stargazers");
     const commitMessage = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("commit-message");
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(JSON.stringify({
         username,
