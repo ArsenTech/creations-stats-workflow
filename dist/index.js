@@ -31898,6 +31898,7 @@ function placeContent(generatedContent) {
     const updated = `${before}\n\n` +
         generatedContent.trim() +
         `\n\n${after}`;
+    core.info(updated);
     external_fs_.writeFileSync(filePath, updated, "utf8");
 }
 function commitAndPush() {
@@ -31930,7 +31931,6 @@ async function run() {
     if (data.gists !== null) {
         markdown += `\n#### Gists\n${data.gists.map(val => `- [${val.description}](${val.url})`).join("\n")}`;
     }
-    core.info(markdown);
     placeContent(markdown);
     commitAndPush();
 }

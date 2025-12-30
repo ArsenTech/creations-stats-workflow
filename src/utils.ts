@@ -73,6 +73,8 @@ export function placeContent(generatedContent: string){
      generatedContent.trim() +
      `\n\n${after}`;
 
+     core.info(updated)
+
      fs.writeFileSync(filePath, updated, "utf8");
 }
 

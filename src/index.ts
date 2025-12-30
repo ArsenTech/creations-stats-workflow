@@ -7,7 +7,6 @@ async function run(){
      if(data.gists !== null){
           markdown += `\n#### Gists\n${data.gists.map(val=>`- [${val.description}](${val.url})`).join("\n")}`;
      }
-     core.info(markdown);
      placeContent(markdown);
      commitAndPush();
 }
