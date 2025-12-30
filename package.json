@@ -2,7 +2,6 @@
   "name": "creations-stats-workflow",
   "version": "1.0.0",
   "description": "A Github Action that generates user's creations (Repositories and Gists). Perfect for profile readme customization!",
-  "license": "MIT",
   "author": "ArsenTech",
   "type": "module",
   "main": "src/index.ts",

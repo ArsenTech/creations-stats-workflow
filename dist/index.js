@@ -27699,7 +27699,7 @@ var __webpack_exports__ = {};
 
 try {
     const username = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("github-username");
-    const exclusions = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("exclusions");
+    const exclusionsTxt = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("exclusions");
     const targetFile = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("target-file");
     const repoLimit = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("repo-limit");
     const gistLimit = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("gist-limit");
@@ -27707,19 +27707,10 @@ try {
     const showForks = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getBooleanInput("show-forks");
     const showGistStargazers = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getBooleanInput("show-gist-stargazers");
     const commitMessage = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("commit-message");
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(JSON.stringify({
-        username,
-        exclusions,
-        targetFile,
-        repoLimit,
-        gistLimit,
-        showArchives,
-        showForks,
-        showGistStargazers,
-        commitMessage
-    }));
+    const exclusions = exclusionsTxt.split("|").map(repoName => repoName.trim());
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(JSON.stringify(exclusions));
 }
 catch (error) {
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(`[ERROR]: ${error.message}`);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(`Creations stats job failed: ${error.message}`);
 }
 
