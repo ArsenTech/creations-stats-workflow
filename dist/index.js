@@ -31850,7 +31850,8 @@ async function fetchData() {
     const includeGists = core.getBooleanInput("include-gists");
     const exclusions = new Set(exclusionsTxt.split("|").map(repoName => repoName.trim()));
     const octokit = new dist_src_Octokit({
-        auth: core.getInput("github-token") || process.env.GITHUB_TOKEN
+        auth: core.getInput("github-token") || process.env.GITHUB_TOKEN,
+        userAgent: "creations-stats-workflow"
     });
     const repoData = await octokit.paginate(octokit.rest.repos.listForUser, {
         username,

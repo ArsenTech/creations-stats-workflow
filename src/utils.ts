@@ -16,7 +16,8 @@ export async function fetchData(): Promise<IResult>{
 
      const exclusions = new Set(exclusionsTxt.split("|").map(repoName=>repoName.trim()));
      const octokit = new Octokit({
-          auth: core.getInput("github-token") || process.env.GITHUB_TOKEN
+          auth: core.getInput("github-token") || process.env.GITHUB_TOKEN,
+          userAgent: "creations-stats-workflow"
      })
 
      const repoData = await octokit.paginate(
