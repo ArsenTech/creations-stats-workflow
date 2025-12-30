@@ -1,54 +1,15 @@
 import * as core from "@actions/core"
-import { Octokit } from "@octokit/rest";
-import { IGitGist, IGitRepo, IResult } from "./types";
+import { fetchData, placeContent, commitAndPush } from "./utils"
 
-async function fetchData(): Promise<IResult>{
-     const username = core.getInput("github-username");
-     const exclusionsTxt = core.getInput("exclusions");
-     const targetFile = core.getInput("target-file");
-     const repoLimit = core.getInput("repo-limit");
-     const gistLimit = core.getInput("gist-limit");
-     const showArchives = core.getBooleanInput("show-archives");
-     const showForks = core.getBooleanInput("show-forks");
-     const commitMessage = core.getInput("commit-message");
-     const includeGists = core.getBooleanInput("include-gists");
-
-     const exclusions = new Set(exclusionsTxt.split("|").map(repoName=>repoName.trim()));
-     const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
-
-     const {data: repoData} = await octokit.repos.listForUser({
-          username,
-          per_page: parseInt(repoLimit)
-     })
-
-     const repos: IGitRepo[] = repoData.filter(repo=>!repo.disabled && !repo.private && !exclusions.has(repo.name)).map(repo=>({
-          name: repo.name,
-          url: repo.html_url,
-          description: repo.description || "No Description",
-          fork: repo.fork,
-          forks: repo.forks_count,
-          stars: repo.stargazers_count,
-          watchers: repo.watchers_count,
-          archived: repo.archived,
-          license: repo.license,
-     })).filter(repo=>{
-          if(!showArchives && repo.archived) return false;
-          if(!showForks && repo.fork) return false;
-          return true
-     });
-
-     if(includeGists){
-          const {data: gistData} = await octokit.gists.listForUser({
-               username,
-               per_page: parseInt(gistLimit)
-          });
-          const gists: IGitGist[] = gistData.filter(gist=>gist.public).map(gist=>({
-               url: gist.html_url,
-               description: gist.description || "Untitled gist"
-          }))
-          return { repositories: repos, gists }
+async function run(){
+     const data = await fetchData();
+     const markdown = `#### Repositories
+     ${data.repositories.map(val=>`- [${val.name}](${val.url}) - ⭐ ${val.stars} - ${val.description}`).join("\n")}\n`
+     if(data.gists){
+          markdown.concat(`#### Gists
+          ${data.gists.map(val=>`- (${val.description})[${val.url}]`).join("\n")}`)
      }
-     return { repositories: repos, gists: null }
+     core.info(markdown)
 }
 
 try{

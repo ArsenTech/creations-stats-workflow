@@ -18,5 +18,3 @@ jobs:
           github-username: ArsenTech
           exclusions: ArsenTech | source-codes
           target-file: test.md
-          show-archives: true
-          include-gists: false
