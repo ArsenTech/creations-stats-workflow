@@ -43,9 +43,9 @@ export async function fetchData(): Promise<IResult>{
           url: repo.html_url,
           description: repo.description || "No Description",
           fork: repo.fork,
-          forks: repo.forks_count,
+          forks: repo.forks,
           stars: repo.stargazers_count,
-          watchers: repo.watchers_count,
+          watchers: repo.watchers,
           archived: repo.archived,
           license: repo.license?.name || "Unlicensed",
      })).filter(repo=>{
@@ -125,6 +125,5 @@ export function makeList(val: IGitRepo, type: "minimal" | "detailed"){
      return `- [${val.name}](${val.url}) - ${val.description}
      - ⚖️ ${val.license}
      - ⭐ Stargazers: ${val.stars}
-     - 🍴 Forks: ${val.forks}
-     - 👀 Watchers: ${val.watchers}\n`
+     - 🍴 Forks: ${val.forks}\n`
 }
