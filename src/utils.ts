@@ -69,9 +69,9 @@ export function placeContent(generatedContent: string){
           after = file.slice(endIdx);
 
      const updated =
-     `${before}\n\n` +
+     `${before}\n` +
      generatedContent.trim() +
-     `\n\n${after}`;
+     `\n${after}`;
 
      core.info(updated)
 

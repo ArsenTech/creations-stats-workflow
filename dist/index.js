@@ -31895,9 +31895,9 @@ function placeContent(generatedContent) {
     if (startIdx === -1 || endIdx === -1)
         throw new Error("CREATIONS tags not found in target file");
     const before = file.slice(0, startIdx + start.length), after = file.slice(endIdx);
-    const updated = `${before}\n\n` +
+    const updated = `${before}\n` +
         generatedContent.trim() +
-        `\n\n${after}`;
+        `\n${after}`;
     core.info(updated);
     external_fs_.writeFileSync(filePath, updated, "utf8");
 }
