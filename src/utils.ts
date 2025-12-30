@@ -15,12 +15,18 @@ export async function fetchData(): Promise<IResult>{
      const includeGists = core.getBooleanInput("include-gists");
 
      const exclusions = new Set(exclusionsTxt.split("|").map(repoName=>repoName.trim()));
-     const octokit = new Octokit({ auth: core.getInput("github-token") || process.env.GITHUB_TOKEN })
-
-     const {data: repoData} = await octokit.repos.listForUser({
-          username,
-          per_page: parseInt(repoLimit)
+     const octokit = new Octokit({
+          auth: core.getInput("github-token") || process.env.GITHUB_TOKEN,
+          userAgent: "creations-stats-workflow"
      })
+
+     const repoData = await octokit.paginate(
+          octokit.rest.repos.listForUser,
+          {
+               username,
+               per_page: parseInt(repoLimit)
+          }
+     )
 
      const repos: IGitRepo[] = repoData.filter(repo=>!repo.disabled && !repo.private && !exclusions.has(repo.name)).map(repo=>({
           name: repo.name,
@@ -40,10 +46,13 @@ export async function fetchData(): Promise<IResult>{
 
      if(includeGists){
           try {
-               const {data: gistData} = await octokit.gists.listForUser({
-                    username,
-                    per_page: parseInt(gistLimit)
-               });
+               const gistData = await octokit.paginate(
+                    octokit.rest.gists.listForUser,
+                    {
+                         username,
+                         per_page: parseInt(gistLimit)
+                    }
+               );
                const gists: IGitGist[] = gistData.filter(gist=>gist.public).map(gist=>({
                     url: gist.html_url,
                     description: gist.description || "Untitled gist"

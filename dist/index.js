@@ -31849,8 +31849,11 @@ async function fetchData() {
     const showForks = core.getBooleanInput("show-forks");
     const includeGists = core.getBooleanInput("include-gists");
     const exclusions = new Set(exclusionsTxt.split("|").map(repoName => repoName.trim()));
-    const octokit = new dist_src_Octokit({ auth: core.getInput("github-token") || process.env.GITHUB_TOKEN });
-    const { data: repoData } = await octokit.repos.listForUser({
+    const octokit = new dist_src_Octokit({
+        auth: core.getInput("github-token") || process.env.GITHUB_TOKEN,
+        userAgent: "creations-stats-workflow"
+    });
+    const repoData = await octokit.paginate(octokit.rest.repos.listForUser, {
         username,
         per_page: parseInt(repoLimit)
     });
@@ -31873,7 +31876,7 @@ async function fetchData() {
     });
     if (includeGists) {
         try {
-            const { data: gistData } = await octokit.gists.listForUser({
+            const gistData = await octokit.paginate(octokit.rest.gists.listForUser, {
                 username,
                 per_page: parseInt(gistLimit)
             });
