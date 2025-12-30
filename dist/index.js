@@ -27844,7 +27844,7 @@ __webpack_unused_export__ = defaultContentType
 var __webpack_exports__ = {};
 
 // EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
-var lib_core = __nccwpck_require__(7484);
+var core = __nccwpck_require__(7484);
 ;// CONCATENATED MODULE: ./node_modules/@octokit/rest/node_modules/universal-user-agent/index.js
 function getUserAgent() {
   if (typeof navigator === "object" && "userAgent" in navigator) {
@@ -31841,13 +31841,13 @@ var external_child_process_ = __nccwpck_require__(5317);
 
 
 async function fetchData() {
-    const username = lib_core.getInput("github-username");
-    const exclusionsTxt = lib_core.getInput("exclusions");
-    const repoLimit = lib_core.getInput("repo-limit");
-    const gistLimit = lib_core.getInput("gist-limit");
-    const showArchives = lib_core.getBooleanInput("show-archives");
-    const showForks = lib_core.getBooleanInput("show-forks");
-    const includeGists = lib_core.getBooleanInput("include-gists");
+    const username = core.getInput("github-username");
+    const exclusionsTxt = core.getInput("exclusions");
+    const repoLimit = core.getInput("repo-limit");
+    const gistLimit = core.getInput("gist-limit");
+    const showArchives = core.getBooleanInput("show-archives");
+    const showForks = core.getBooleanInput("show-forks");
+    const includeGists = core.getBooleanInput("include-gists");
     const exclusions = new Set(exclusionsTxt.split("|").map(repoName => repoName.trim()));
     const octokit = new dist_src_Octokit({ auth: process.env.GITHUB_TOKEN });
     const { data: repoData } = await octokit.repos.listForUser({
@@ -31888,8 +31888,8 @@ function placeContent(generatedContent) {
     const start = "<!-- CREATIONS-START -->";
     const end = "<!-- CREATIONS-END -->";
     const targetFile = core.getInput("target-file");
-    const filePath = path.resolve(targetFile);
-    const file = fs.readFileSync(filePath, "utf8");
+    const filePath = external_path_.resolve(targetFile);
+    const file = external_fs_.readFileSync(filePath, "utf8");
     const startIdx = file.indexOf(start);
     const endIdx = file.indexOf(end);
     if (startIdx === -1 || endIdx === -1)
@@ -31898,16 +31898,16 @@ function placeContent(generatedContent) {
     const updated = `${before}\n\n` +
         generatedContent.trim() +
         `\n\n${after}`;
-    fs.writeFileSync(filePath, updated, "utf8");
+    external_fs_.writeFileSync(filePath, updated, "utf8");
 }
 function commitAndPush() {
     const commitMessage = core.getInput("commit-message");
     const targetFile = core.getInput("target-file");
-    exec("git config --global user.name github-actions[bot]");
-    exec("git config --global user.email github-actions@github.com");
+    (0,external_child_process_.exec)("git config --global user.name github-actions[bot]");
+    (0,external_child_process_.exec)("git config --global user.email github-actions@github.com");
     if (process.env.GITHUB_TOKEN)
-        exec(`git remote set-url origin https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
-    exec("git diff --quiet", (error) => {
+        (0,external_child_process_.exec)(`git remote set-url origin https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+    (0,external_child_process_.exec)("git diff --quiet", (error) => {
         if (!error) {
             core.info("No changes to commit");
             process.exit(0);
@@ -31917,8 +31917,8 @@ function commitAndPush() {
         console.error(error.message);
         process.exit(1);
     });
-    exec(`git add "${targetFile}"`);
-    exec(`git commit -m "${commitMessage}" && git push`);
+    (0,external_child_process_.exec)(`git add "${targetFile}"`);
+    (0,external_child_process_.exec)(`git commit -m "${commitMessage}" && git push`);
 }
 
 ;// CONCATENATED MODULE: ./src/index.ts
@@ -31930,16 +31930,18 @@ async function run() {
     if (data.gists !== null) {
         markdown += `\n#### Gists\n${data.gists.map(val => `- [${val.description}](${val.url})`).join("\n")}`;
     }
-    lib_core.info(markdown);
+    core.info(markdown);
+    placeContent(markdown);
+    commitAndPush();
 }
 try {
     run().catch(error => {
-        lib_core.setFailed(`Creations stats job failed: ${error.message}`);
+        core.setFailed(`Creations stats job failed: ${error.message}`);
         process.exit(1);
     });
 }
 catch (error) {
-    lib_core.setFailed(`Creations stats job failed: ${error.message}`);
+    core.setFailed(`Creations stats job failed: ${error.message}`);
     process.exit(1);
 }
 
