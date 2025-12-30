@@ -1,5 +1,5 @@
 # Change Log
-All notable changes of my blog page will be documented here.
+All notable changes of **Creations Stats** Github Action will be documented here.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
