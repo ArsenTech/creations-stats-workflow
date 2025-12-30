@@ -2,7 +2,7 @@ import * as core from "@actions/core"
 import { fetchData, placeContent, commitAndPush } from "./utils"
 
 async function run(){
-     const githubToken = process.env.GITHUB_TOKEN;
+     const githubToken = core.getInput("github-token")
      const data = await fetchData(githubToken);
      let markdown = `#### Repositories\n${data.repositories.map(val=>`- [${val.name}](${val.url}) - ⭐ ${val.stars} - ${val.description}`).join("\n")}\n`
      if(data.gists !== null){

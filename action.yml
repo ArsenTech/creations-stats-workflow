@@ -5,11 +5,9 @@ inputs:
   github-username:
     description: A Github username to show gists and Repositories
     required: true
-    default: ""
   exclusions:
     description: Repos to exclude from showing it
     required: false
-    default: ""
   target-file:
     description: Target markdown file to place in the repo
     default: README.md
@@ -38,6 +36,9 @@ inputs:
     description: Include gists created by the mentioned github user
     default: true
     required: false
+  github-token:
+    description: A Github Token to make the workflow work;
+    required: true
 
 outputs:
   results:
