@@ -1,8 +1,8 @@
 import * as core from "@actions/core"
 import * as github from "@actions/github"
-import { Octokit, App } from "octokit";
+import { Octokit } from "@octokit/rest";
 
-try{
+async function run(){
      const username = core.getInput("github-username");
      const exclusionsTxt = core.getInput("exclusions");
      const targetFile = core.getInput("target-file");
@@ -16,7 +16,21 @@ try{
      const octokit = new Octokit({
           auth: process.env.GITHUB_TOKEN
      })
-     core.info(JSON.stringify(octokit))
+
+     const {data} = await octokit.repos.listForUser({
+          username,
+          per_page: parseInt(repoLimit)
+     })
+     
+     core.info(JSON.stringify(data,undefined,2))
+}
+
+try{
+     run().catch(error=>{
+          core.setFailed(`Creations stats job failed: ${error.message}`)
+          process.exit(1)
+     })
 } catch (error: any){
      core.setFailed(`Creations stats job failed: ${error.message}`)
+     process.exit(1)
 }
