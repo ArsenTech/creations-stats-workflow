@@ -5,6 +5,8 @@ import * as fs from "fs";
 import * as path from "path";
 import {execSync} from "child_process"
 
+const sleep = (ms: number) => new Promise(res=>setTimeout(res,ms))
+
 export async function fetchData(): Promise<IResult>{
      const username = core.getInput("github-username");
      const exclusionsTxt = core.getInput("exclusions");
@@ -16,7 +18,7 @@ export async function fetchData(): Promise<IResult>{
 
      const exclusions = new Set(exclusionsTxt.split("|").map(repoName=>repoName.trim()));
      const octokit = new Octokit({
-          auth: core.getInput("github-token") || process.env.GITHUB_TOKEN,
+          auth: process.env.GITHUB_TOKEN,
           userAgent: "creations-stats-workflow"
      })
 
@@ -27,6 +29,7 @@ export async function fetchData(): Promise<IResult>{
                per_page: parseInt(repoLimit)
           }
      )
+     await sleep(750);
 
      const repos: IGitRepo[] = repoData.filter(repo=>!repo.disabled && !repo.private && !exclusions.has(repo.name)).map(repo=>({
           name: repo.name,
@@ -53,6 +56,7 @@ export async function fetchData(): Promise<IResult>{
                          per_page: parseInt(gistLimit)
                     }
                );
+               await sleep(750);
                const gists: IGitGist[] = gistData.filter(gist=>gist.public).map(gist=>({
                     url: gist.html_url,
                     description: gist.description || "Untitled gist"
@@ -92,16 +96,11 @@ export function placeContent(generatedContent: string){
 export function commitAndPush(){
      const commitMessage = core.getInput("commit-message");
      const targetFile = core.getInput("target-file");
-     const ghToken = core.getInput("github-token") || process.env.GITHUB_TOKEN;
 
      execSync("git config --global user.email github-actions@github.com");
      execSync("git config --global user.name github-actions[bot]");
-
-     if (ghToken)
-          execSync(
-               `git remote set-url origin https://${ghToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`
-          );
-
+     if (process.env.GITHUB_TOKEN)
+          execSync(`git remote set-url origin https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
      try {
           execSync("git diff --quiet");
           core.info("No changes to commit");
@@ -109,7 +108,6 @@ export function commitAndPush(){
      } catch {
           // diff detected, continue
      }
-
      execSync(`git add "${targetFile}"`);
      execSync(`git commit -m "${commitMessage}"`);
      execSync("git push");

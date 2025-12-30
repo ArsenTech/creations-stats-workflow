@@ -36,9 +36,6 @@ inputs:
     description: Include gists created by the mentioned github user
     default: true
     required: false
-  github-token:
-    description: A Github Token to make the workflow work
-    required: false
 
 outputs:
   results:

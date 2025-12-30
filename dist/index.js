@@ -31840,6 +31840,7 @@ var external_child_process_ = __nccwpck_require__(5317);
 
 
 
+const sleep = (ms) => new Promise(res => setTimeout(res, ms));
 async function fetchData() {
     const username = core.getInput("github-username");
     const exclusionsTxt = core.getInput("exclusions");
@@ -31850,13 +31851,14 @@ async function fetchData() {
     const includeGists = core.getBooleanInput("include-gists");
     const exclusions = new Set(exclusionsTxt.split("|").map(repoName => repoName.trim()));
     const octokit = new dist_src_Octokit({
-        auth: core.getInput("github-token") || process.env.GITHUB_TOKEN,
+        auth: process.env.GITHUB_TOKEN,
         userAgent: "creations-stats-workflow"
     });
     const repoData = await octokit.paginate(octokit.rest.repos.listForUser, {
         username,
         per_page: parseInt(repoLimit)
     });
+    await sleep(750);
     const repos = repoData.filter(repo => !repo.disabled && !repo.private && !exclusions.has(repo.name)).map(repo => ({
         name: repo.name,
         url: repo.html_url,
@@ -31880,6 +31882,7 @@ async function fetchData() {
                 username,
                 per_page: parseInt(gistLimit)
             });
+            await sleep(750);
             const gists = gistData.filter(gist => gist.public).map(gist => ({
                 url: gist.html_url,
                 description: gist.description || "Untitled gist"
@@ -31911,11 +31914,10 @@ function placeContent(generatedContent) {
 function commitAndPush() {
     const commitMessage = core.getInput("commit-message");
     const targetFile = core.getInput("target-file");
-    const ghToken = core.getInput("github-token") || process.env.GITHUB_TOKEN;
     (0,external_child_process_.execSync)("git config --global user.email github-actions@github.com");
     (0,external_child_process_.execSync)("git config --global user.name github-actions[bot]");
-    if (ghToken)
-        (0,external_child_process_.execSync)(`git remote set-url origin https://${ghToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+    if (process.env.GITHUB_TOKEN)
+        (0,external_child_process_.execSync)(`git remote set-url origin https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
     try {
         (0,external_child_process_.execSync)("git diff --quiet");
         core.info("No changes to commit");
@@ -31948,6 +31950,12 @@ try {
     });
 }
 catch (error) {
+    if (error.status === 403) {
+        core.warning("The Github Action skipped due to temporary rate limit");
+    }
+    else {
+        throw error;
+    }
     core.setFailed(`Creations stats job failed: ${error.message}`);
     process.exit(1);
 }

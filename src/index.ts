@@ -17,6 +17,11 @@ try{
           process.exit(1)
      })
 } catch (error: any){
+     if(error.status===403){
+          core.warning("The Github Action skipped due to temporary rate limit");
+     } else {
+          throw error;
+     }
      core.setFailed(`Creations stats job failed: ${error.message}`)
      process.exit(1)
 }
