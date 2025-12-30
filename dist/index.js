@@ -31909,22 +31909,21 @@ function commitAndPush() {
     const commitMessage = core.getInput("commit-message");
     const targetFile = core.getInput("target-file");
     const ghToken = core.getInput("github-token") || process.env.GITHUB_TOKEN;
-    (0,external_child_process_.exec)("git config --global user.email github-actions@github.com");
+    (0,external_child_process_.execSync)("git config --global user.email github-actions@github.com");
+    (0,external_child_process_.execSync)("git config --global user.name github-actions[bot]");
     if (ghToken)
-        (0,external_child_process_.exec)(`git remote set-url origin https://${ghToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
-    (0,external_child_process_.exec)("git diff --quiet", (error) => {
-        if (!error) {
-            core.info("No changes to commit");
-            process.exit(0);
-        }
-        if (error.code === 1)
-            return;
-        console.error(error.message);
-        process.exit(1);
-    });
-    (0,external_child_process_.exec)("git config --global user.name github-actions[bot]");
-    (0,external_child_process_.exec)(`git add "${targetFile}"`);
-    (0,external_child_process_.exec)(`git commit -m "${commitMessage}" && git push`);
+        (0,external_child_process_.execSync)(`git remote set-url origin https://${ghToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+    try {
+        (0,external_child_process_.execSync)("git diff --quiet");
+        core.info("No changes to commit");
+        return;
+    }
+    catch {
+        // diff detected, continue
+    }
+    (0,external_child_process_.execSync)(`git add "${targetFile}"`);
+    (0,external_child_process_.execSync)(`git commit -m "${commitMessage}"`);
+    (0,external_child_process_.execSync)("git push");
 }
 
 ;// CONCATENATED MODULE: ./src/index.ts

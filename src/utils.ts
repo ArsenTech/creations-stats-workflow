@@ -3,7 +3,7 @@ import { Octokit } from "@octokit/rest";
 import { IGitGist, IGitRepo, IResult } from "./types";
 import * as fs from "fs";
 import * as path from "path";
-import {exec} from "child_process"
+import {execSync} from "child_process"
 
 export async function fetchData(): Promise<IResult>{
      const username = core.getInput("github-username");
@@ -83,20 +83,25 @@ export function placeContent(generatedContent: string){
 export function commitAndPush(){
      const commitMessage = core.getInput("commit-message");
      const targetFile = core.getInput("target-file");
-     const ghToken = core.getInput("github-token") || process.env.GITHUB_TOKEN
-     exec("git config --global user.email github-actions@github.com");
+     const ghToken = core.getInput("github-token") || process.env.GITHUB_TOKEN;
+
+     execSync("git config --global user.email github-actions@github.com");
+     execSync("git config --global user.name github-actions[bot]");
+
      if (ghToken)
-          exec(`git remote set-url origin https://${ghToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
-     exec("git diff --quiet",(error)=>{
-          if(!error){
-               core.info("No changes to commit");
-               process.exit(0);
-          }
-          if (error.code === 1) return;
-          console.error(error.message);
-          process.exit(1);
-     });
-     exec("git config --global user.name github-actions[bot]");
-     exec(`git add "${targetFile}"`);
-     exec(`git commit -m "${commitMessage}" && git push`)
+          execSync(
+               `git remote set-url origin https://${ghToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`
+          );
+
+     try {
+          execSync("git diff --quiet");
+          core.info("No changes to commit");
+          return;
+     } catch {
+          // diff detected, continue
+     }
+
+     execSync(`git add "${targetFile}"`);
+     execSync(`git commit -m "${commitMessage}"`);
+     execSync("git push");
 }
