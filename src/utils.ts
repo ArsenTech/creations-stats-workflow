@@ -124,5 +124,5 @@ export function makeList(val: IGitRepo, type: "minimal" | "detailed"){
      return `- [${val.name}](${val.url}) - ${val.description}
      - ⚖️ ${val.license}
      - ⭐ Stargazers: ${val.stars}
-     - 🍴 Forks: ${val.forks}\n`
+     - 🍴 Forks: ${val.forks}`
 }

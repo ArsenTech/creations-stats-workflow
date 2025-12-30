@@ -31945,7 +31945,7 @@ function makeList(val, type) {
     return `- [${val.name}](${val.url}) - ${val.description}
      - ⚖️ ${val.license}
      - ⭐ Stargazers: ${val.stars}
-     - 🍴 Forks: ${val.forks}\n`;
+     - 🍴 Forks: ${val.forks}`;
 }
 
 ;// CONCATENATED MODULE: ./src/index.ts
