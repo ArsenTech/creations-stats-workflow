@@ -9,9 +9,15 @@ const sleep = (ms: number) => new Promise(res=>setTimeout(res,ms))
 
 export async function fetchData(): Promise<IResult>{
      const username = core.getInput("github-username");
+     if(username.trim()==="")
+          core.error("Username is required")
      const exclusionsTxt = core.getInput("exclusions");
      const repoLimit = core.getInput("repo-limit");
+     if(parseInt(repoLimit) <= 0)
+          core.error("Respository limit should be positive")
      const gistLimit = core.getInput("gist-limit");
+     if(parseInt(gistLimit) <= 0)
+          core.error("Gists limit should be positive")
      const showArchives = core.getBooleanInput("show-archives");
      const showForks = core.getBooleanInput("show-forks");
      const includeGists = core.getBooleanInput("include-gists");
