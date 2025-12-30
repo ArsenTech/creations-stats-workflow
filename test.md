@@ -7,21 +7,25 @@
      - ⚖️ MIT License
      - ⭐ Stargazers: 2
      - 🍴 Forks: 1
+     - 👀 Watchers: 2
 
 - [blog](https://github.com/ArsenTech/blog) - Cybersecurity, tech tutorials, unique coding projects, and other tech-related posts all in one place: "ArsenTech Blog".
      - ⚖️ MIT License
      - ⭐ Stargazers: 1
      - 🍴 Forks: 0
+     - 👀 Watchers: 1
 
 - [downloads](https://github.com/ArsenTech/downloads) - Downloads Page of ArsenTech's Website
      - ⚖️ MIT License
      - ⭐ Stargazers: 3
      - 🍴 Forks: 0
+     - 👀 Watchers: 3
 
 - [idea-checklist](https://github.com/ArsenTech/idea-checklist) - A checklist app for Tech YouTube Streamers and other people built using React, Tauri, and ShadCN UI
      - ⚖️ MIT License
      - ⭐ Stargazers: 1
      - 🍴 Forks: 0
+     - 👀 Watchers: 1
 
 
 #### Gists
