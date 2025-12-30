@@ -20,6 +20,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.CREATIONS_SECRET}}
         uses: ./
         with:
-          github-username: "      "
+          github-username: ArsenTech
           exclusions: ArsenTech | source-codes
           target-file: test.md
+          repo-limit: -5
