@@ -22,7 +22,7 @@ async function run(){
           per_page: parseInt(repoLimit)
      })
 
-     const repos = data.filter(repo=>!repo.disabled && !repo.private).map(repo=>{
+     const repos = data.filter(repo=>!repo.disabled && !repo.private && !exclusions.has(repo.name)).map(repo=>{
           const {
                name,
                html_url,
@@ -34,7 +34,6 @@ async function run(){
                language,
                archived,
                license,
-               visibility
           } = repo
           return {
                name,
@@ -47,9 +46,11 @@ async function run(){
                language,
                archived,
                license,
-               visibility
           }
-     }).filter(repo=>repo.fork===showForks || repo.archived===showArchives || !exclusions.has(repo.name));
+     }).filter(repo=>
+          repo.fork===showForks ||
+          repo.archived===showArchives
+     );
 
      core.info(JSON.stringify(repos,undefined,2))
 }

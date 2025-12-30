@@ -31849,8 +31849,8 @@ async function run() {
         username,
         per_page: parseInt(repoLimit)
     });
-    const repos = data.filter(repo => !repo.disabled && !repo.private).map(repo => {
-        const { name, html_url, description, fork, forks_count, stargazers_count, watchers_count, language, archived, license, visibility } = repo;
+    const repos = data.filter(repo => !repo.disabled && !repo.private && !exclusions.has(repo.name)).map(repo => {
+        const { name, html_url, description, fork, forks_count, stargazers_count, watchers_count, language, archived, license, } = repo;
         return {
             name,
             html_url,
@@ -31862,9 +31862,9 @@ async function run() {
             language,
             archived,
             license,
-            visibility
         };
-    }).filter(repo => repo.fork === showForks || repo.archived === showArchives || !exclusions.has(repo.name));
+    }).filter(repo => repo.fork === showForks ||
+        repo.archived === showArchives);
     core.info(JSON.stringify(repos, undefined, 2));
 }
 try {
