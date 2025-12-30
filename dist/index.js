@@ -31943,8 +31943,7 @@ function commitAndPush() {
 function makeList(val, type) {
     if (type === "minimal")
         return `- [${val.name}](${val.url}) - ⭐ ${val.stars} - ${val.description}`;
-    return `- [${val.name}](${val.url})
-     - ${val.description}
+    return `- [${val.name}](${val.url}) - ${val.description}
      - ⚖️ ${val.license}
      - ⭐ Stargazers: ${val.stars}
      - 🍴 Forks: ${val.forks}

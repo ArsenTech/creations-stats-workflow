@@ -122,8 +122,7 @@ export function commitAndPush(){
 export function makeList(val: IGitRepo, type: "minimal" | "detailed"){
      if(type==="minimal")
           return `- [${val.name}](${val.url}) - ⭐ ${val.stars} - ${val.description}`;
-     return `- [${val.name}](${val.url})
-     - ${val.description}
+     return `- [${val.name}](${val.url}) - ${val.description}
      - ⚖️ ${val.license}
      - ⭐ Stargazers: ${val.stars}
      - 🍴 Forks: ${val.forks}
