@@ -31895,19 +31895,18 @@ function placeContent(generatedContent) {
     if (startIdx === -1 || endIdx === -1)
         throw new Error("CREATIONS tags not found in target file");
     const before = file.slice(0, startIdx + start.length), after = file.slice(endIdx);
-    const updated = `${before}\n` +
+    const updated = `${before}\n\n` +
         generatedContent.trim() +
-        `\n${after}`;
-    core.info(updated);
+        `\n\n${after}`;
     external_fs_.writeFileSync(filePath, updated, "utf8");
 }
 function commitAndPush() {
     const commitMessage = core.getInput("commit-message");
     const targetFile = core.getInput("target-file");
-    (0,external_child_process_.exec)("git config --global user.name github-actions[bot]");
     (0,external_child_process_.exec)("git config --global user.email github-actions@github.com");
     if (process.env.GITHUB_TOKEN)
         (0,external_child_process_.exec)(`git remote set-url origin https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+    core.info(`https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
     (0,external_child_process_.exec)("git diff --quiet", (error) => {
         if (!error) {
             core.info("No changes to commit");
@@ -31918,6 +31917,7 @@ function commitAndPush() {
         console.error(error.message);
         process.exit(1);
     });
+    (0,external_child_process_.exec)("git config --global user.name github-actions[bot]");
     (0,external_child_process_.exec)(`git add "${targetFile}"`);
     (0,external_child_process_.exec)(`git commit -m "${commitMessage}" && git push`);
 }

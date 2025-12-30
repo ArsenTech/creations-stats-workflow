@@ -69,11 +69,9 @@ export function placeContent(generatedContent: string){
           after = file.slice(endIdx);
 
      const updated =
-     `${before}\n` +
+     `${before}\n\n` +
      generatedContent.trim() +
-     `\n${after}`;
-
-     core.info(updated)
+     `\n\n${after}`;
 
      fs.writeFileSync(filePath, updated, "utf8");
 }
@@ -81,10 +79,10 @@ export function placeContent(generatedContent: string){
 export function commitAndPush(){
      const commitMessage = core.getInput("commit-message");
      const targetFile = core.getInput("target-file");
-     exec("git config --global user.name github-actions[bot]");
      exec("git config --global user.email github-actions@github.com");
      if (process.env.GITHUB_TOKEN)
           exec(`git remote set-url origin https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+     core.info(`https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`)
      exec("git diff --quiet",(error)=>{
           if(!error){
                core.info("No changes to commit");
@@ -94,7 +92,7 @@ export function commitAndPush(){
           console.error(error.message);
           process.exit(1);
      });
-
+     exec("git config --global user.name github-actions[bot]");
      exec(`git add "${targetFile}"`);
      exec(`git commit -m "${commitMessage}" && git push`)
 }
