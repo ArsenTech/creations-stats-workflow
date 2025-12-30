@@ -5,7 +5,7 @@ import * as fs from "fs";
 import * as path from "path";
 import {exec} from "child_process"
 
-export async function fetchData(githubToken?: string): Promise<IResult>{
+export async function fetchData(): Promise<IResult>{
      const username = core.getInput("github-username");
      const exclusionsTxt = core.getInput("exclusions");
      const repoLimit = core.getInput("repo-limit");
@@ -15,7 +15,7 @@ export async function fetchData(githubToken?: string): Promise<IResult>{
      const includeGists = core.getBooleanInput("include-gists");
 
      const exclusions = new Set(exclusionsTxt.split("|").map(repoName=>repoName.trim()));
-     const octokit = new Octokit({ auth: githubToken })
+     const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
      const {data: repoData} = await octokit.repos.listForUser({
           username,
@@ -76,12 +76,12 @@ export function placeContent(generatedContent: string){
      fs.writeFileSync(filePath, updated, "utf8");
 }
 
-export function commitAndPush(githubToken?: string){
+export function commitAndPush(){
      const commitMessage = core.getInput("commit-message");
      const targetFile = core.getInput("target-file");
      exec("git config --global user.email github-actions@github.com");
-     if (githubToken)
-          exec(`git remote set-url origin https://${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+     if (process.env.GITHUB_TOKEN)
+          exec(`git remote set-url origin https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
      exec("git diff --quiet",(error)=>{
           if(!error){
                core.info("No changes to commit");

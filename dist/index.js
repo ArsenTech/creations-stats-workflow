@@ -31840,7 +31840,7 @@ var external_child_process_ = __nccwpck_require__(5317);
 
 
 
-async function fetchData(githubToken) {
+async function fetchData() {
     const username = core.getInput("github-username");
     const exclusionsTxt = core.getInput("exclusions");
     const repoLimit = core.getInput("repo-limit");
@@ -31849,7 +31849,7 @@ async function fetchData(githubToken) {
     const showForks = core.getBooleanInput("show-forks");
     const includeGists = core.getBooleanInput("include-gists");
     const exclusions = new Set(exclusionsTxt.split("|").map(repoName => repoName.trim()));
-    const octokit = new dist_src_Octokit({ auth: githubToken });
+    const octokit = new dist_src_Octokit({ auth: process.env.GITHUB_TOKEN });
     const { data: repoData } = await octokit.repos.listForUser({
         username,
         per_page: parseInt(repoLimit)
@@ -31900,12 +31900,12 @@ function placeContent(generatedContent) {
         `\n\n${after}`;
     external_fs_.writeFileSync(filePath, updated, "utf8");
 }
-function commitAndPush(githubToken) {
+function commitAndPush() {
     const commitMessage = core.getInput("commit-message");
     const targetFile = core.getInput("target-file");
     (0,external_child_process_.exec)("git config --global user.email github-actions@github.com");
-    if (githubToken)
-        (0,external_child_process_.exec)(`git remote set-url origin https://${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+    if (process.env.GITHUB_TOKEN)
+        (0,external_child_process_.exec)(`git remote set-url origin https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
     (0,external_child_process_.exec)("git diff --quiet", (error) => {
         if (!error) {
             core.info("No changes to commit");
@@ -31925,14 +31925,13 @@ function commitAndPush(githubToken) {
 
 
 async function run() {
-    const githubToken = core.getInput("github-token");
-    const data = await fetchData(githubToken);
+    const data = await fetchData();
     let markdown = `#### Repositories\n${data.repositories.map(val => `- [${val.name}](${val.url}) - ⭐ ${val.stars} - ${val.description}`).join("\n")}\n`;
     if (data.gists !== null) {
         markdown += `\n#### Gists\n${data.gists.map(val => `- [${val.description}](${val.url})`).join("\n")}`;
     }
     placeContent(markdown);
-    commitAndPush(githubToken);
+    commitAndPush();
 }
 try {
     run().catch(error => {
