@@ -57,15 +57,15 @@ The **Creations Stats** Github action helps you get latest repositories (and gis
 > The `repo-name` and `another-repo` are basic repo name placeholders
 
 #### Minimal Design
-- [repo-name](https://github.com/ArsenTech/creations-stats-workflow) - ⭐ 5 - Useful repository description
-- [another-repo](https://github.com/ArsenTech/creations-stats-workflow) - ⭐ 3 - Another useful repository description
+- [repo-name][repo-example-link] - ⭐ 5 - Useful repository description
+- [another-repo][repo-example-link] - ⭐ 3 - Another useful repository description
 
 #### Detailed Design
-- [repo-name](https://github.com/ArsenTech/creations-stats-workflow) - Useful repository description
+- [repo-name][repo-example-link] - Useful repository description
   - ⚖️ MIT License
   - ⭐ Stargazers: 5
   - 🍴 Forks: 3
-- [another-repo](https://github.com/ArsenTech/creations-stats-workflow) - Another useful repository description
+- [another-repo][repo-example-link] - Another useful repository description
   - ⚖️ MIT License
   - ⭐ Stargazers: 3
   - 🍴 Forks: 1
@@ -193,6 +193,7 @@ Distributed under the MIT License. See [LICENSE.md][license-url] for more inform
 [contributing-url]: https://github.com/ArsenTech/creations-stats-workflow/blob/main/CONTRIBUTING.md
 [changelog-url]: https://github.com/ArsenTech/creations-stats-workflow/blob/main/CHANGELOG.md
 [website-url]: https://arsentech.github.io
+[repo-example-link]: https://github.com/ArsenTech/creations-stats-workflow
 
 <!-- Languages -->
 [typescript-shield]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
