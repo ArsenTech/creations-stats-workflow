@@ -179,7 +179,7 @@ Distributed under the MIT License. See [LICENSE.md][license-url] for more inform
 [issues-url]: https://github.com/ArsenTech/creations-stats-workflow/issues
 [license-shield]: https://img.shields.io/github/license/ArsenTech/creations-stats-workflow?color=%2322b455
 [license-url]: https://github.com/ArsenTech/creations-stats-workflow/blob/main/LICENSE.md
-[version-shield]: https://img.shields.io/github/v/release/ArsenTech/creations-stats-workflow?sort=semver&display_name=release&logo=github&label=Marketplace&labelColor=%2322b455
+[version-shield]: https://img.shields.io/github/v/release/ArsenTech/creations-stats-workflow?sort=semver&display_name=release&logo=github&label=Marketplace
 [version-url]: https://github.com/marketplace/actions/creations-stats-workflow
 [dependents-shield]: https://badgen.net/github/dependents-repo/ArsenTech/creations-stats-workflow?icon=github&label=Dependents
 [dependents-url]: https://github.com/ArsenTech/creations-stats-workflow/network/dependents
