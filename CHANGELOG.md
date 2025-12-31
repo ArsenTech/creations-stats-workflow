@@ -8,11 +8,11 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Highlight
 It took ~70 workflow runs to make a successful Github Action like this.
 ### Changed
-- Made Github Username, Exclusions, and Target file into GitHub Action options
+- Made GitHub Username, Exclusions, and Target file into GitHub Action options
 - Rewritten the code from Bash (prototype) to Typescript with some types and utilities
 - Updated the fetch function
 ### Improved
-- Feature to add contents in between 2 comment tags
+- Feature to add contents between 2 comment tags
 - Feature To Fetch Repos and Gists
 ### Added
 - The **Detailed** Repo list item design
@@ -25,7 +25,7 @@ It took ~70 workflow runs to make a successful Github Action like this.
 - Show Forks
 - Custom commit Message
 - Include Gists
-- Respository List Design
+- Repository List Design
 - Custom comment tag name
 
 ## 0.5.0 - 2025-12-04 (Prototype)
