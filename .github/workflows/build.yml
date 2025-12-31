@@ -1,0 +1,37 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  creations_stats_job:
+    name: A Test Job
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Generate Portfolio with Minimal style
+        env:
+          GITHUB_TOKEN: ${{secrets.CREATIONS_SECRET}}
+        uses: ./
+        with:
+          github-username: ArsenTech
+          exclusions: ArsenTech | source-codes
+          target-file: test.md
+          comment-tag-name: MINIMAL
+
+      - name: Generate Portfolio with Detailed style
+        env:
+          GITHUB_TOKEN: ${{secrets.CREATIONS_SECRET}}
+        uses: ./
+        with:
+          github-username: ArsenTech
+          exclusions: ArsenTech | source-codes
+          target-file: test.md
+          comment-tag-name: DETAILED
+          repo-list-design: detailed

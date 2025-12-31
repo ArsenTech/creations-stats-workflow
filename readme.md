@@ -137,7 +137,8 @@ This workflow has additional options for customization. The following are the li
 | `show-forks`       | Boolean                           | Option to show forked Repositories                 | `false`                          | ❌        |
 | `commit-message`   | String                            | A custom commit message                            | `"Update repos and gists stats"` | ❌        |
 | `include-gists`    | Boolean                           | Include gists created by the mentioned github user | `true`                           | ❌        |
-| `repo-list-design` | `minimal` or `detailed` (Enum)    | Repository list item design type                   | `minimal`                        | ❌        |
+| `repo-list-design` | `minimal` or `detailed` (Enum)    | Repository list item design type                   | `"minimal"`                        | ❌        |
+| `comment-tag-name` | String    | A name of the custom comment tag for placing content                   | `"CREATIONS"`                        | ❌        |
 
 ## Versioning
 This website follows [Semantic Versioning](https://semver.org/). You can view the full [Changelog][changelog-url] for details on each website version.
@@ -184,8 +185,8 @@ Distributed under the MIT License. See [LICENSE.md][license-url] for more inform
 [version-url]: https://github.com/marketplace/actions/creations-stats-workflow
 [dependents-shield]: https://badgen.net/github/dependents-repo/ArsenTech/creations-stats-workflow?icon=github&label=Dependents
 [dependents-url]: https://github.com/ArsenTech/creations-stats-workflow/network/dependents
-[status-shield]: https://img.shields.io/github/actions/workflow/status/ArsenTech/creations-stats-workflow/main.yml?color=%2322b455
-[status-url]: https://github.com/ArsenTech/creations-stats-workflow/actions/workflows/main.yml
+[status-shield]: https://img.shields.io/github/actions/workflow/status/ArsenTech/creations-stats-workflow/build.yml?color=%2322b455
+[status-url]: https://github.com/ArsenTech/creations-stats-workflow/actions/workflows/build.yml
 [commits-since-shield]: https://img.shields.io/github/commits-since/ArsenTech/creations-stats-workflow/latest?color=%2322b455&label=Commits%20since%20latest%20version
 [created-at-shield]: https://img.shields.io/github/created-at/ArsenTech/creations-stats-workflow
 [repo-size-shield]: https://img.shields.io/github/repo-size/ArsenTech/creations-stats-workflow

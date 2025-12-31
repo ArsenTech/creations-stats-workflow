@@ -76,8 +76,10 @@ export async function fetchData(): Promise<IResult>{
 }
 
 export function placeContent(generatedContent: string){
-     const start = "<!-- CREATIONS-START -->";
-     const end = "<!-- CREATIONS-END -->";
+     const commentTagName = core.getInput("comment-tag-name")
+     if(commentTagName.trim()==="") errorMessage('Comment Tag Name should be either "CREATIONS" or any other name, not an empty string')
+     const start = `<!-- ${commentTagName}-START -->`;
+     const end = `<!-- ${commentTagName}-END -->`;
      const targetFile = core.getInput("target-file");
 
      const filePath = path.resolve(targetFile);

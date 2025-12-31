@@ -31905,8 +31905,11 @@ async function fetchData() {
     return { repositories: repos, gists: null };
 }
 function placeContent(generatedContent) {
-    const start = "<!-- CREATIONS-START -->";
-    const end = "<!-- CREATIONS-END -->";
+    const commentTagName = core.getInput("comment-tag-name");
+    if (commentTagName.trim() === "")
+        errorMessage('Comment Tag Name should be either "CREATIONS" or any other name, not an empty string');
+    const start = `<!-- ${commentTagName}-START -->`;
+    const end = `<!-- ${commentTagName}-END -->`;
     const targetFile = core.getInput("target-file");
     const filePath = external_path_.resolve(targetFile);
     const file = external_fs_.readFileSync(filePath, "utf8");

@@ -40,6 +40,10 @@ inputs:
     description: Repository list design (either minimal or detailed)
     default: minimal
     required: false
+  comment-tag-name:
+    description: A name of the comment tag for placing content
+    default: CREATIONS
+    required: false
 
 outputs:
   results:

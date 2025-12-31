@@ -21,9 +21,10 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Gists Limit
 - Show Archives
 - Show Forks
-- Commit Message
+- Custom commit Message
 - Include Gists
 - Respository List Design
+- Custom comment tag name
 
 ## 0.5.0 - 2025-12-04 (Prototype)
 ### Highlights
