@@ -1,3 +1,4 @@
+name: Build the Github Action
 on:
   push:
     branches:
