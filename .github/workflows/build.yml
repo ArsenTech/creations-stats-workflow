@@ -17,8 +17,6 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Generate Portfolio with Minimal style
-        env:
-          GITHUB_TOKEN: ${{secrets.CREATIONS_SECRET}}
         uses: ./
         with:
           github-username: ArsenTech
@@ -27,8 +25,6 @@ jobs:
           comment-tag-name: MINIMAL
 
       - name: Generate Portfolio with Detailed style
-        env:
-          GITHUB_TOKEN: ${{secrets.CREATIONS_SECRET}}
         uses: ./
         with:
           github-username: ArsenTech
