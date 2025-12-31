@@ -106,7 +106,7 @@ export function commitAndPush(){
      const targetFile = core.getInput("target-file");
 
      execSync("git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com");
-     execSync("git config --global user.name Creations Stats Action [bot]");
+     execSync("git config --global user.name github-actions[bot]");
      if (process.env.GITHUB_TOKEN)
           execSync(`git remote set-url origin https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
      try {
