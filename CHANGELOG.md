@@ -4,7 +4,7 @@ All notable changes of the **Creations Stats** Github Action will be documented 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
-## 1.0.0 - Unreleased
+## 1.0.0 - 2025-12-31
 ### Highlight
 It took ~70 workflow runs to make a successful Github Action like this.
 ### Changed
