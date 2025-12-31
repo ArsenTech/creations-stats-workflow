@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 ## 1.0.0 - Unreleased
+### Highlight
+It took ~70 workflow runs to make a successful Github Action like this.
 ### Changed
 - Made Github Username, Exclusions, and Target file into GitHub Action options
 - Rewritten the code from Bash (prototype) to Typescript with some types and utilities
