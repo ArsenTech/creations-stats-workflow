@@ -113,8 +113,6 @@ The **Creations Stats** Github action helps you get latest repositories (and gis
 
            - name: Fetch portfolio from Github API
              uses: ArsenTech/creations-stats-workflow@v1
-             env:
-               GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
              with:
                github-username: <your-username>
                repo-list-design: detailed
