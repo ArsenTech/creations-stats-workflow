@@ -31926,8 +31926,8 @@ function placeContent(generatedContent) {
 function commitAndPush() {
     const commitMessage = core.getInput("commit-message");
     const targetFile = core.getInput("target-file");
-    (0,external_child_process_.execSync)("git config --global user.email github-actions@github.com");
-    (0,external_child_process_.execSync)("git config --global user.name github-actions[bot]");
+    (0,external_child_process_.execSync)("git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com");
+    (0,external_child_process_.execSync)("git config --global user.name Creations Stats Action [bot]");
     if (process.env.GITHUB_TOKEN)
         (0,external_child_process_.execSync)(`git remote set-url origin https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
     try {
