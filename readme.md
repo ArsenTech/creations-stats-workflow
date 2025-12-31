@@ -121,6 +121,8 @@ The **Creations Stats** Github action helps you get latest repositories (and gis
 5. Go to **Repository Settings > Actions > General**, then update the "Workflow permissions" to "Read and write permissions", then click on save.
 6. Wait for it to run automatically, or trigger it manually to see the result instantly.
 
+Example: https://github.com/ArsenTech/creations-stats-workflow/blob/main/examples/final-version.yml
+
 ## Options
 This workflow has additional options for customization. The following are the list of  available options:
 

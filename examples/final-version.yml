@@ -1,12 +1,13 @@
-name: Build the Github Action
+name: Generate Project List
+
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
 
 jobs:
   creations_stats_job:
-    name: Build a Github action
+    name: Update profile with recent repositories and gists
     runs-on: ubuntu-latest
     
     permissions:
@@ -17,7 +18,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Generate Portfolio with Minimal style
-        uses: ./
+        uses: ArsenTech/creations-stats-workflow@v1
         with:
           github-username: ArsenTech
           exclusions: ArsenTech | source-codes
@@ -26,7 +27,7 @@ jobs:
           commit-message: "[AUTOMATED-CHANGE]: Updated Portfolio stats using a minimal design"
 
       - name: Generate Portfolio with Detailed style
-        uses: ./
+        uses: ArsenTech/creations-stats-workflow@v1
         with:
           github-username: ArsenTech
           exclusions: ArsenTech | source-codes
