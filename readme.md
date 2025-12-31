@@ -179,8 +179,8 @@ Distributed under the MIT License. See [LICENSE.md][license-url] for more inform
 [stars-url]: https://github.com/ArsenTech/creations-stats-workflow/stargazers
 [issues-shield]: https://img.shields.io/github/issues/ArsenTech/creations-stats-workflow.svg
 [issues-url]: https://github.com/ArsenTech/creations-stats-workflow/issues
-[license-shield]: https://img.shields.io/github/license/ArsenTech/creations-stats-workflow?color=%2322b455
-[license-url]: https://github.com/ArsenTech/creations-stats-workflow/blob/main/LICENSE.md
+[license-shield]: https://img.shields.io/github/license/ArsenTech/creations-stats-workflow?color=#22b455
+[license-url]: https://github.com/ArsenTech/creations-stats-workflow/blob/main/license.md
 [version-shield]: https://img.shields.io/github/v/release/ArsenTech/creations-stats-workflow?sort=semver&display_name=release&logo=github&label=Marketplace
 [version-url]: https://github.com/marketplace/actions/creations-stats-workflow
 [dependents-shield]: https://badgen.net/github/dependents-repo/ArsenTech/creations-stats-workflow?icon=github&label=Dependents
