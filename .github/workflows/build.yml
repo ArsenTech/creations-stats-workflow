@@ -23,6 +23,7 @@ jobs:
           exclusions: ArsenTech | source-codes
           target-file: test.md
           comment-tag-name: MINIMAL
+          commit-message: "[AUTOMATED-CHANGE]: Updated Portfolio stats using a minimal design"
 
       - name: Generate Portfolio with Detailed style
         uses: ./
@@ -32,3 +33,4 @@ jobs:
           target-file: test.md
           comment-tag-name: DETAILED
           repo-list-design: detailed
+          commit-message: "[AUTOMATED-CHANGE]: Updated Portfolio stats using a detailed design"
