@@ -12,9 +12,9 @@
 [![Dependents][dependents-shield]][dependents-url]
 [![version][version-shield]][version-url]
 [![Contributors][contributors-shield]][contributors-url]
+[![project_license][license-shield]][license-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
-[![project_license][license-shield]][license-url]
 
 [![Issues][issues-shield]][issues-url]
 [![build-status][status-shield]][status-url]
@@ -166,8 +166,8 @@ Distributed under the MIT License. See [LICENSE.md][license-url] for more inform
 > [ArsenTech's Website][website-url]
 
 <!-- Markdown Links -->
-[star-history-chart]: https://api.star-history.com/svg?repos=ArsenTech/creations-stats-workflow&type=Date
-[star-history-url]: https://api.star-history.com/svg?repos=ArsenTech/creations-stats-workflow&type=Date
+[star-history-chart]: https://api.star-history.com/svg?repos=ArsenTech/creations-stats-workflow&type=date
+[star-history-url]: https://www.star-history.com/#ArsenTech/creations-stats-workflow&type=date
 [contributors-shield]: https://img.shields.io/github/contributors/ArsenTech/creations-stats-workflow.svg?color=%2322b455
 [contributors-url]: https://github.com/ArsenTech/creations-stats-workflow/graphs/contributors
 [top-contributors]: https://contrib.rocks/image?repo=ArsenTech/creations-stats-workflow
