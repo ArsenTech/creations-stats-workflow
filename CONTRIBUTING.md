@@ -1,5 +1,5 @@
 <p align="center">
-  <img src=".github/logo-mark.png" alt="Idea Checklist" width="400">
+  <img src=".github/logo-mark.png" alt="Creations Stats" width="400">
 </p>
 
 <h1 align="center">Contributing Guide</h1>
@@ -62,6 +62,9 @@ feat: add bulk idea selection feature
 >
 > More info for the **nektos/act** installation: https://nektosact.com/installation/index.html
 
+> [!NOTE]
+> The `npm start` command will work slower for the first time
+
 1. Fork the repository and clone your fork:
       ```bash
       git clone https://github.com/ArsenTech/creations-stats-workflow.git
@@ -76,7 +79,6 @@ feat: add bulk idea selection feature
       npm run compile
       npm start
       ```
-
 PRs are reviewed with kindness and calmness :-)
 
 ## 💡 Feedback & Feature Requests
