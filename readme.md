@@ -2,7 +2,7 @@
      <img src=".github/readme-logo.png" alt="Creations Stats" width="120" height="120">
 </p>
 <h1 align="center">Creations Stats</h3>
-<p align="center">A Github Action that generates user's creations stats (Repositories and Gists). Perfect for profile readme customization!</p>
+<p align="center">A Github Action that generates user's creations (portfolio) stats (Repositories and Gists). Perfect for profile readme customization!</p>
 <p align="center">
      <a href="https://github.com/ArsenTech/creations-stats-workflow/issues/new?assignees=&labels=&template=bug_report.md&title=">Report bug</a>
      &nbsp;&middot;&nbsp;
