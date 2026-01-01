@@ -1,14 +1,15 @@
 name: Test the Github Action
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+    paths-ignore:
+      - test.md
 
 jobs:
   creations_stats_job:
     name: Update profile with recent repositories and gists
     runs-on: ubuntu-latest
-    
+
     permissions:
       contents: write
 
@@ -16,23 +17,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Set Origin URL
-        run: git remote set-url origin https://github.com/ArsenTech/creations-stats-workflow.git
-
       - name: Generate Portfolio with Minimal style
         uses: ./
         with:
           github-username: ArsenTech
-          exclusions: ArsenTech | source-codes
+          exclusions: ArsenTech,source-codes
           target-file: test.md
           comment-tag-name: MINIMAL
+          repo-list-design: minimal
           commit-message: "[AUTOMATED-CHANGE]: Updated Portfolio stats using a minimal design"
 
       - name: Generate Portfolio with Detailed style
         uses: ./
         with:
           github-username: ArsenTech
-          exclusions: ArsenTech | source-codes
+          exclusions: ArsenTech,source-codes
           target-file: test.md
           comment-tag-name: DETAILED
           repo-list-design: detailed

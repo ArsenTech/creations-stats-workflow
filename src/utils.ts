@@ -8,7 +8,7 @@ import {execSync} from "child_process"
 const sleep = (ms: number) => new Promise(res=>setTimeout(res,ms));
 export function errorMessage(msg: string): never {
      core.error(msg)
-     return process.exit(1);
+     throw new Error(msg)
 }
 
 export async function fetchData(): Promise<IResult>{
@@ -23,7 +23,7 @@ export async function fetchData(): Promise<IResult>{
      const showForks = core.getBooleanInput("show-forks");
      const includeGists = core.getBooleanInput("include-gists");
 
-     const exclusions = new Set(exclusionsTxt.split("|").map(repoName=>repoName.trim()));
+     const exclusions = new Set(exclusionsTxt.split(",").map(repoName=>repoName.trim()).filter(Boolean));
      const octokit = new Octokit({
           auth: process.env.GITHUB_TOKEN,
           userAgent: "creations-stats-workflow"
@@ -51,7 +51,7 @@ export async function fetchData(): Promise<IResult>{
           if(!showArchives && repo.archived) return false;
           if(!showForks && repo.fork) return false;
           return true
-     });
+     }).slice(0, parseInt(repoLimit));
 
      if(includeGists){
           try {
@@ -102,13 +102,17 @@ export function placeContent(generatedContent: string){
 }
 
 export function commitAndPush(){
+     if (process.env.ACT) {
+          core.info("Skipping git commit and push under act");
+          return;
+     }
      const commitMessage = core.getInput("commit-message");
      const targetFile = core.getInput("target-file");
 
      execSync("git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com");
      execSync("git config --global user.name github-actions[bot]");
      if (process.env.GITHUB_TOKEN)
-          execSync(`git remote set-url origin https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+          execSync(`git remote set-url origin git remote set-url origin https://x-access-token:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`,{ stdio: "inherit" });
      try {
           execSync("git diff --quiet");
           core.info("No changes to commit");
@@ -123,8 +127,10 @@ export function commitAndPush(){
 export function makeList(val: IGitRepo, type: "minimal" | "detailed"){
      if(type==="minimal")
           return `- [${val.name}](${val.url}) - ⭐ ${val.stars} - ${val.description}`;
-     return `- [${val.name}](${val.url}) - ${val.description}
-     - ⚖️ ${val.license}
-     - ⭐ Stargazers: ${val.stars}
-     - 🍴 Forks: ${val.forks}`
+     return [
+          `- [${val.name}](${val.url}) - ${val.description}`,
+          `  - ⚖️ ${val.license}`,
+          `  - ⭐ Stargazers: ${val.stars}`,
+          `  - 🍴 Forks: ${val.forks}`,
+     ].join("\n");
 }

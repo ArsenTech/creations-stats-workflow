@@ -31843,7 +31843,7 @@ var external_child_process_ = __nccwpck_require__(5317);
 const sleep = (ms) => new Promise(res => setTimeout(res, ms));
 function errorMessage(msg) {
     core.error(msg);
-    return process.exit(1);
+    throw new Error(msg);
 }
 async function fetchData() {
     const username = core.getInput("github-username");
@@ -31859,7 +31859,7 @@ async function fetchData() {
     const showArchives = core.getBooleanInput("show-archives");
     const showForks = core.getBooleanInput("show-forks");
     const includeGists = core.getBooleanInput("include-gists");
-    const exclusions = new Set(exclusionsTxt.split("|").map(repoName => repoName.trim()));
+    const exclusions = new Set(exclusionsTxt.split(",").map(repoName => repoName.trim()).filter(Boolean));
     const octokit = new dist_src_Octokit({
         auth: process.env.GITHUB_TOKEN,
         userAgent: "creations-stats-workflow"
@@ -31884,7 +31884,7 @@ async function fetchData() {
         if (!showForks && repo.fork)
             return false;
         return true;
-    });
+    }).slice(0, parseInt(repoLimit));
     if (includeGists) {
         try {
             const gistData = await octokit.paginate(octokit.rest.gists.listForUser, {
@@ -31924,12 +31924,16 @@ function placeContent(generatedContent) {
     external_fs_.writeFileSync(filePath, updated, "utf8");
 }
 function commitAndPush() {
+    if (process.env.ACT) {
+        core.info("Skipping git commit and push under act");
+        return;
+    }
     const commitMessage = core.getInput("commit-message");
     const targetFile = core.getInput("target-file");
     (0,external_child_process_.execSync)("git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com");
     (0,external_child_process_.execSync)("git config --global user.name github-actions[bot]");
-    if (process.env.GITHUB_TOKEN)
-        (0,external_child_process_.execSync)(`git remote set-url origin https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`);
+    if (process.env.GITHUB_TOKEN && !process.env.ACT)
+        (0,external_child_process_.execSync)(`git remote set-url origin git remote set-url origin https://x-access-token:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`, { stdio: "inherit" });
     try {
         (0,external_child_process_.execSync)("git diff --quiet");
         core.info("No changes to commit");
@@ -31945,10 +31949,12 @@ function commitAndPush() {
 function makeList(val, type) {
     if (type === "minimal")
         return `- [${val.name}](${val.url}) - ⭐ ${val.stars} - ${val.description}`;
-    return `- [${val.name}](${val.url}) - ${val.description}
-     - ⚖️ ${val.license}
-     - ⭐ Stargazers: ${val.stars}
-     - 🍴 Forks: ${val.forks}`;
+    return [
+        `- [${val.name}](${val.url}) - ${val.description}`,
+        `  - ⚖️ ${val.license}`,
+        `  - ⭐ Stargazers: ${val.stars}`,
+        `  - 🍴 Forks: ${val.forks}`,
+    ].join("\n");
 }
 
 ;// CONCATENATED MODULE: ./src/index.ts
