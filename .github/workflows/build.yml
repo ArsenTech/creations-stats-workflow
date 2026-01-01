@@ -1,4 +1,4 @@
-name: Build the Github Action
+name: Test the Github Action
 on:
   push:
     branches:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   creations_stats_job:
-    name: Build a Github action
+    name: Update profile with recent repositories and gists
     runs-on: ubuntu-latest
     
     permissions:
