@@ -6,7 +6,8 @@
   "type": "module",
   "main": "src/index.ts",
   "scripts": {
-    "compile": "npx ncc build src/index.ts -o dist"
+    "compile": "npx ncc build src/index.ts -o dist",
+    "start": "act --workflows .github/workflows/build.yml"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",

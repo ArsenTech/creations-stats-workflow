@@ -16,6 +16,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      - name: Set Origin URL
+        run: git remote set-url origin https://github.com/ArsenTech/creations-stats-workflow.git
+
       - name: Generate Portfolio with Minimal style
         uses: ./
         with:
