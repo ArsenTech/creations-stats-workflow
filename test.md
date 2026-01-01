@@ -28,7 +28,7 @@
      - 🍴 Forks: 0
 - [creations-stats-workflow](https://github.com/ArsenTech/creations-stats-workflow) - A Github Action that generates user's portfolio stats (Repositories and Gists). Perfect for profile readme customization!
      - ⚖️ MIT License
-     - ⭐ Stargazers: 0
+     - ⭐ Stargazers: 1
      - 🍴 Forks: 0
 - [downloads](https://github.com/ArsenTech/downloads) - Downloads Page of ArsenTech's Website
      - ⚖️ MIT License
