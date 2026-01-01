@@ -88,7 +88,9 @@ export function placeContent(generatedContent: string){
      const endIdx = file.indexOf(end);
 
      if (startIdx === -1 || endIdx === -1)
-          throw new Error("CREATIONS tags not found in target file");
+          throw new Error(
+               `Comment tags <!-- ${commentTagName}-START --> / <!-- ${commentTagName}-END --> not found in target file`
+          );
 
      const before = file.slice(0, startIdx + start.length),
           after = file.slice(endIdx);
@@ -98,7 +100,13 @@ export function placeContent(generatedContent: string){
      generatedContent.trim() +
      `\n\n${after}`;
 
-     fs.writeFileSync(filePath, updated, "utf8");
+     if (process.env.ACT) {
+          core.info("Generated content preview:\n================");
+          core.info(generatedContent.trim());
+          return;
+     } else {
+          fs.writeFileSync(filePath, updated, "utf8");
+     }
 }
 
 export function commitAndPush(){

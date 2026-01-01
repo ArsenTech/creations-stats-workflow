@@ -31916,12 +31916,19 @@ function placeContent(generatedContent) {
     const startIdx = file.indexOf(start);
     const endIdx = file.indexOf(end);
     if (startIdx === -1 || endIdx === -1)
-        throw new Error("CREATIONS tags not found in target file");
+        throw new Error(`Comment tags <!-- ${commentTagName}-START --> / <!-- ${commentTagName}-END --> not found in target file`);
     const before = file.slice(0, startIdx + start.length), after = file.slice(endIdx);
     const updated = `${before}\n\n` +
         generatedContent.trim() +
         `\n\n${after}`;
-    external_fs_.writeFileSync(filePath, updated, "utf8");
+    if (process.env.ACT) {
+        core.info("Generated content preview:\n================");
+        core.info(generatedContent.trim());
+        return;
+    }
+    else {
+        external_fs_.writeFileSync(filePath, updated, "utf8");
+    }
 }
 function commitAndPush() {
     if (process.env.ACT) {
@@ -31932,7 +31939,7 @@ function commitAndPush() {
     const targetFile = core.getInput("target-file");
     (0,external_child_process_.execSync)("git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com");
     (0,external_child_process_.execSync)("git config --global user.name github-actions[bot]");
-    if (process.env.GITHUB_TOKEN && !process.env.ACT)
+    if (process.env.GITHUB_TOKEN)
         (0,external_child_process_.execSync)(`git remote set-url origin git remote set-url origin https://x-access-token:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`, { stdio: "inherit" });
     try {
         (0,external_child_process_.execSync)("git diff --quiet");
