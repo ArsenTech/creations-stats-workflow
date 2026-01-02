@@ -4,6 +4,13 @@ All notable changes of the **Creations Stats** Github Action will be documented 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [1.0.1] - 2026-01-02
+### Added
+- The local Github Action run command + some checks
+### Changed
+- Changed the exclusions separator from `|` to `,`
+- Changed formatting of the **detailed** repository list
+
 ## [1.0.0] - 2025-12-31
 ### Highlight
 It took ~70 workflow runs to make a successful Github Action like this.
@@ -36,5 +43,6 @@ It took ~70 workflow runs to make a successful Github Action like this.
 - The **Minimal** Repo list item design
 - Feature to add contents in between 2 comment tags
 
-[1.0.0]: https://github.com/ArsenTech/creations-stats-workflow/releases/tag/creations-stats-v1.0.0
+[1.0.1]: https://github.com/ArsenTech/creations-stats-workflow/releases/tag/v1.0.1
+[1.0.0]: https://github.com/ArsenTech/creations-stats-workflow/releases/tag/v1
 [0.5.0]: https://github.com/ArsenTech/creations-stats-workflow/blob/main/examples/prototype.yml

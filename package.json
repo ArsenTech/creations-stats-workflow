@@ -1,6 +1,6 @@
 {
   "name": "creations-stats-workflow",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Github Action that generates user's creations (Repositories and Gists). Perfect for profile readme customization!",
   "author": "ArsenTech",
   "type": "module",
