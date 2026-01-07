@@ -23,14 +23,13 @@ export async function fetchData(): Promise<IResult>{
      const showForks = core.getBooleanInput("show-forks");
      const gistTagName = core.getInput("gist-tag-name");
      const repoTagName = core.getInput("repo-tag-name");
-
      const exclusions = new Set(exclusionsTxt.split(",").map(repoName=>repoName.trim()).filter(Boolean));
-     const octokit = new Octokit({
-          auth: process.env.GITHUB_TOKEN,
-          userAgent: "creations-stats-workflow"
-     })
 
-     if(repoTagName.trim()!==""){
+     try {
+          const octokit = new Octokit({
+               auth: process.env.GITHUB_TOKEN,
+               userAgent: "creations-stats-workflow"
+          })
           const repoData = await octokit.paginate(
                octokit.rest.repos.listForUser,
                {
@@ -38,8 +37,6 @@ export async function fetchData(): Promise<IResult>{
                     per_page: parseInt(repoLimit)
                }
           )
-          await sleep(750);
-
           const repos: IGitRepo[] = repoData.filter(repo=>!repo.disabled && !repo.private && !exclusions.has(repo.name)).map(repo=>({
                name: repo.name,
                url: repo.html_url,
@@ -54,31 +51,29 @@ export async function fetchData(): Promise<IResult>{
                if(!showForks && repo.fork) return false;
                return true
           }).slice(0, parseInt(repoLimit));
-          return { repositories: repos, gists: "skipped" }
-     }
-
-     if(gistTagName.trim()===""){
-          try {
-               const gistData = await octokit.paginate(
-                    octokit.rest.gists.listForUser,
-                    {
-                         username,
-                         per_page: parseInt(gistLimit)
-                    }
-               );
-               await sleep(750);
-               const gists: IGitGist[] = gistData.filter(gist=>gist.public).map(gist=>({
-                    url: gist.html_url,
-                    description: gist.description || "Untitled gist"
-               }))
-               return { repositories: "skipped", gists }
-          } catch {
-               core.warning("Gists couldn't be fetched (permissions or rate limits). Keeping the previous gists section")
-               return { repositories: "skipped", gists: "skipped" }
+          await sleep(750);
+          const gistData = await octokit.paginate(
+               octokit.rest.gists.listForUser,
+               {
+                    username,
+                    per_page: parseInt(gistLimit)
+               }
+          );
+          const gists: IGitGist[] = gistData.filter(gist=>gist.public).map(gist=>({
+               url: gist.html_url,
+               description: gist.description || "Untitled gist"
+          }))
+          await sleep(750);
+          const hasRepos = repos.length>0 && repoTagName.trim()!=="";
+          const hasGists = gists.length>0 && gistTagName.trim()!=="";
+          return {
+               repositories: hasRepos ? repos : "skipped",
+               gists: hasGists ? gists : "skipped"
           }
+     } catch {
+          core.warning("Gists or couldn't be fetched (permissions or rate limits). Keeping the previous gists section")
+          return { repositories: "skipped", gists: "skipped" }
      }
-
-     return {repositories: "skipped", gists: "skipped"}
 }
 
 export function placeContent(generatedContent: string, commentTagName: string){
