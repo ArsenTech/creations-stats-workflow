@@ -31981,11 +31981,11 @@ async function run() {
     const repoTag = core.getInput("repo-tag-name");
     const gistTagName = core.getInput("gist-tag-name");
     if (hasRepos(data.repositories)) {
-        const repoMDList = `#### Repositories\n${data.repositories.map(val => makeList(val, repoListDesign)).join("\n")}\n`;
+        const repoMDList = `${data.repositories.map(val => makeList(val, repoListDesign)).join("\n")}\n`;
         placeContent(repoMDList, repoTag);
     }
     if (hasGists(data.gists)) {
-        const gistMDList = `#### Gists\n${data.gists.map(val => `- [${val.description}](${val.url})`).join("\n")}`;
+        const gistMDList = `${data.gists.map(val => `- [${val.description}](${val.url})`).join("\n")}`;
         placeContent(gistMDList, gistTagName);
     }
     commitAndPush();
