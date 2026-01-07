@@ -70,9 +70,10 @@ export async function fetchData(): Promise<IResult>{
                return { repositories: repos, gists }
           } catch {
                core.warning("Could not fetch gists (token lacks permission)");
+               return { repositories: repos, gists: "skipped" }
           }
      }
-     return { repositories: repos, gists: null }
+     return { repositories: repos, gists: "skipped" }
 }
 
 export function placeContent(generatedContent: string){

@@ -14,5 +14,5 @@ export interface IGitGist {
 }
 export interface IResult {
     repositories: IGitRepo[];
-    gists: IGitGist[] | null;
+    gists: IGitGist[] | "skipped";
 }

@@ -7,7 +7,7 @@ async function run(){
           errorMessage('Repo List design should be either "minimal" or "detailed"')
      const data = await fetchData();
      let markdown = `#### Repositories\n${data.repositories.map(val=>makeList(val, repoListDesign)).join("\n")}\n`
-     if(data.gists !== null){
+     if(data.gists !== "skipped"){
           markdown += `\n#### Gists\n${data.gists.map(val=>`- [${val.description}](${val.url})`).join("\n")}`;
      }
      placeContent(markdown);
