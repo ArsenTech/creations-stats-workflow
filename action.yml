@@ -32,17 +32,17 @@ inputs:
     description: A custom commit message
     default: Update repos and gists stats
     required: false
-  include-gists:
-    description: Include gists created by the mentioned github user
-    default: true
-    required: false
   repo-list-design:
     description: Repository list design (either minimal or detailed)
     default: minimal
     required: false
-  comment-tag-name:
-    description: A name of the comment tag for placing content
-    default: CREATIONS
+  repo-tag-name:
+    description: A name of the custom comment tag for placing repositories
+    default: REPOS
+    required: false
+  gist-tag-name:
+    description: A name of the custom comment tag for placing gists
+    default: GISTS
     required: false
 
 outputs:

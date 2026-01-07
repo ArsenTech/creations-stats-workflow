@@ -23,7 +23,7 @@ jobs:
           github-username: ArsenTech
           exclusions: ArsenTech,source-codes
           target-file: test.md
-          comment-tag-name: MINIMAL
+          repo-tag-name: MINIMAL
           repo-list-design: minimal
           commit-message: "[AUTOMATED-CHANGE]: Updated Portfolio stats using a minimal design"
 
@@ -33,6 +33,14 @@ jobs:
           github-username: ArsenTech
           exclusions: ArsenTech,source-codes
           target-file: test.md
-          comment-tag-name: DETAILED
+          repo-tag-name: DETAILED
           repo-list-design: detailed
           commit-message: "[AUTOMATED-CHANGE]: Updated Portfolio stats using a detailed design"
+
+      - name: Generate Portfolio with Detailed style
+        uses: ./
+        with:
+          github-username: ArsenTech
+          exclusions: ArsenTech,source-codes
+          target-file: test.md
+          commit-message: "[AUTOMATED-CHANGE]: Updated Gist stats"

@@ -15,6 +15,6 @@ export interface IGitGist{
 }
 
 export interface IResult{
-     repositories: IGitRepo[],
+     repositories: IGitRepo[] | "skipped",
      gists: IGitGist[] | "skipped"
 }

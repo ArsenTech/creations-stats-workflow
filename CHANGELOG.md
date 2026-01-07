@@ -4,6 +4,19 @@ All notable changes of the **Creations Stats** Github Action will be documented 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [1.0.2] - 2026-01-07
+> [!IMPORTANT]
+> This feature is a breaking change, which means some gists can be fetched only by using a separate comment tag
+### Added
+- `repo-tag-name` option
+- `gist-tag-name` option
+### Improved
+- The Repoistories and gists fetch feature
+- the Section placement feature
+### Removed
+- `include-gists` option
+- `comment-tag-name` option
+
 ## [1.0.1] - 2026-01-02
 ### Added
 - The local Github Action run command + some checks
@@ -12,7 +25,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Changed formatting of the **detailed** repository list
 
 ## [1.0.0] - 2025-12-31
-### Highlight
+### Highlights
 It took ~70 workflow runs to make a successful Github Action like this.
 ### Changed
 - Made GitHub Username, Exclusions, and Target file into GitHub Action options
@@ -43,6 +56,7 @@ It took ~70 workflow runs to make a successful Github Action like this.
 - The **Minimal** Repo list item design
 - Feature to add contents in between 2 comment tags
 
+[1.0.2]: https://github.com/ArsenTech/creations-stats-workflow/releases/tag/v1.0.2
 [1.0.1]: https://github.com/ArsenTech/creations-stats-workflow/releases/tag/v1.0.1
 [1.0.0]: https://github.com/ArsenTech/creations-stats-workflow/releases/tag/v1
 [0.5.0]: https://github.com/ArsenTech/creations-stats-workflow/blob/main/examples/prototype.yml

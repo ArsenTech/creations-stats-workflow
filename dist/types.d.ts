@@ -13,6 +13,6 @@ export interface IGitGist {
     description: string;
 }
 export interface IResult {
-    repositories: IGitRepo[];
+    repositories: IGitRepo[] | "skipped";
     gists: IGitGist[] | "skipped";
 }

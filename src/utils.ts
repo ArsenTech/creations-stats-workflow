@@ -21,7 +21,8 @@ export async function fetchData(): Promise<IResult>{
      if(parseInt(gistLimit) <= 0) errorMessage("Gists limit should be positive")
      const showArchives = core.getBooleanInput("show-archives");
      const showForks = core.getBooleanInput("show-forks");
-     const includeGists = core.getBooleanInput("include-gists");
+     const gistTagName = core.getInput("gist-tag-name");
+     const repoTagName = core.getInput("repo-tag-name");
 
      const exclusions = new Set(exclusionsTxt.split(",").map(repoName=>repoName.trim()).filter(Boolean));
      const octokit = new Octokit({
@@ -29,55 +30,59 @@ export async function fetchData(): Promise<IResult>{
           userAgent: "creations-stats-workflow"
      })
 
-     const repoData = await octokit.paginate(
-          octokit.rest.repos.listForUser,
-          {
-               username,
-               per_page: parseInt(repoLimit)
-          }
-     )
-     await sleep(750);
+     if(repoTagName.trim()!==""){
+          const repoData = await octokit.paginate(
+               octokit.rest.repos.listForUser,
+               {
+                    username,
+                    per_page: parseInt(repoLimit)
+               }
+          )
+          await sleep(750);
 
-     const repos: IGitRepo[] = repoData.filter(repo=>!repo.disabled && !repo.private && !exclusions.has(repo.name)).map(repo=>({
-          name: repo.name,
-          url: repo.html_url,
-          description: repo.description || "No Description",
-          fork: repo.fork,
-          forks: repo.forks,
-          stars: repo.stargazers_count,
-          archived: repo.archived,
-          license: repo.license?.name || "Unlicensed",
-     })).filter(repo=>{
-          if(!showArchives && repo.archived) return false;
-          if(!showForks && repo.fork) return false;
-          return true
-     }).slice(0, parseInt(repoLimit));
+          const repos: IGitRepo[] = repoData.filter(repo=>!repo.disabled && !repo.private && !exclusions.has(repo.name)).map(repo=>({
+               name: repo.name,
+               url: repo.html_url,
+               description: repo.description || "No Description",
+               fork: repo.fork,
+               forks: repo.forks,
+               stars: repo.stargazers_count,
+               archived: repo.archived,
+               license: repo.license?.name || "Unlicensed",
+          })).filter(repo=>{
+               if(!showArchives && repo.archived) return false;
+               if(!showForks && repo.fork) return false;
+               return true
+          }).slice(0, parseInt(repoLimit));
 
-     if(includeGists){
-          try {
+          if(gistTagName.trim()===""){
                throw new Error("test")
-               // const gistData = await octokit.paginate(
-               //      octokit.rest.gists.listForUser,
-               //      {
-               //           username,
-               //           per_page: parseInt(gistLimit)
-               //      }
-               // );
-               // await sleep(750);
-               // const gists: IGitGist[] = gistData.filter(gist=>gist.public).map(gist=>({
-               //      url: gist.html_url,
-               //      description: gist.description || "Untitled gist"
-               // }))
-               // return { repositories: repos, gists }
-          } catch {
-               return { repositories: repos, gists: "skipped" }
+               try {
+                    const gistData = await octokit.paginate(
+                         octokit.rest.gists.listForUser,
+                         {
+                              username,
+                              per_page: parseInt(gistLimit)
+                         }
+                    );
+                    await sleep(750);
+                    const gists: IGitGist[] = gistData.filter(gist=>gist.public).map(gist=>({
+                         url: gist.html_url,
+                         description: gist.description || "Untitled gist"
+                    }))
+                    return { repositories: repos, gists }
+               } catch {
+                    core.warning("Gists couldn't be fetched (permissions or rate limits). Keeping the previous gists section")
+                    return { repositories: repos, gists: "skipped" }
+               }
           }
+          return { repositories: repos, gists: "skipped" }
      }
-     return { repositories: repos, gists: "skipped" }
+
+     return {repositories: "skipped", gists: "skipped"}
 }
 
-export function placeContent(generatedContent: string){
-     const commentTagName = core.getInput("comment-tag-name")
+export function placeContent(generatedContent: string, commentTagName: string){
      if(commentTagName.trim()==="") errorMessage('Comment Tag Name should be either "CREATIONS" or any other name, not an empty string')
      const start = `<!-- ${commentTagName}-START -->`;
      const end = `<!-- ${commentTagName}-END -->`;
@@ -143,6 +148,5 @@ export function makeList(val: IGitRepo, type: "minimal" | "detailed"){
           `  - 🍴 Forks: ${val.forks}`,
      ].join("\n");
 }
-export function hasGists(gists: IGitGist[] | "skipped"): gists is IGitGist[]{
-     return gists !== "skipped"
-}
+export const hasGists = (gists: IGitGist[] | "skipped"): gists is IGitGist[] => gists !== "skipped";
+export const hasRepos = (repos: IGitRepo[] | "skipped"): repos is IGitRepo[] => repos!=="skipped";

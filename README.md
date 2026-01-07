@@ -112,7 +112,7 @@ The **Creations Stats** GitHub action helps you retrieve the latest repository d
              uses: actions/checkout@v4
 
            - name: Fetch portfolio from Github API
-             uses: ArsenTech/creations-stats-workflow@v1.0.1
+             uses: ArsenTech/creations-stats-workflow@v1.0.2
              with:
                github-username: <your-username>
                repo-list-design: detailed
@@ -136,9 +136,9 @@ This workflow has additional options for customization. The following is the lis
 | `show-archives`    | Boolean                           | Option to show archived Repositories               | `false`                          | ❌        |
 | `show-forks`       | Boolean                           | Option to show forked Repositories                 | `false`                          | ❌        |
 | `commit-message`   | String                            | A custom commit message                            | `"Update repos and gists stats"` | ❌        |
-| `include-gists`    | Boolean                           | Include gists created by the mentioned github user | `true`                           | ❌        |
 | `repo-list-design` | `minimal` or `detailed` (Enum)    | Repository list item design type                   | `"minimal"`                        | ❌        |
-| `comment-tag-name` | String    | A name of the custom comment tag for placing content                   | `"CREATIONS"`                        | ❌        |
+| `repo-tag-name` | String    | A name of the custom comment tag for placing repositories                   | `"REPOS"`                        | ❌        |
+| `gist-tag-name` | String    | A name of the custom comment tag for placing gists                   | `"GISTS"`                        | ❌        |
 
 ## Versioning
 This website follows [Semantic Versioning](https://semver.org/). You can view the full [Changelog][changelog-url] for details on each website version.

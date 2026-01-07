@@ -18,20 +18,31 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Generate Portfolio with Minimal style
-        uses: ArsenTech/creations-stats-workflow@v1
+        uses: ArsenTech/creations-stats-workflow@v1.0.2
         with:
           github-username: ArsenTech
-          exclusions: ArsenTech | source-codes
+          exclusions: ArsenTech,source-codes
           target-file: test.md
-          comment-tag-name: MINIMAL
+          repo-tag-name: MINIMAL
+          repo-list-design: minimal
           commit-message: "[AUTOMATED-CHANGE]: Updated Portfolio stats using a minimal design"
 
       - name: Generate Portfolio with Detailed style
-        uses: ArsenTech/creations-stats-workflow@v1
+        uses: ArsenTech/creations-stats-workflow@v1.0.2
         with:
           github-username: ArsenTech
-          exclusions: ArsenTech | source-codes
+          exclusions: ArsenTech,source-codes
           target-file: test.md
-          comment-tag-name: DETAILED
+          repo-tag-name: DETAILED
           repo-list-design: detailed
           commit-message: "[AUTOMATED-CHANGE]: Updated Portfolio stats using a detailed design"
+
+      - name: Generate Portfolio with Detailed style
+        uses: ArsenTech/creations-stats-workflow@v1.0.2
+        with:
+          github-username: ArsenTech
+          exclusions: ArsenTech,source-codes
+          target-file: test.md
+          gist-tag-name: DETAILED
+          repo-list-design: detailed
+          commit-message: "[AUTOMATED-CHANGE]: Updated Gist stats"
