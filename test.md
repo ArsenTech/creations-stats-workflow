@@ -14,7 +14,6 @@
 
 <!-- DETAILED-START -->
 
-#### Repositories
 - [arsentech.github.io](https://github.com/ArsenTech/arsentech.github.io) - ArsenTech's Official Personal Website
   - ⚖️ MIT License
   - ⭐ Stargazers: 2
