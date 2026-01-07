@@ -11,7 +11,6 @@
 ### 📘 Detailed Design
 
 <!-- DETAILED-START -->
-
 - [arsentech.github.io](https://github.com/ArsenTech/arsentech.github.io) - ArsenTech's Official Personal Website
   - ⚖️ MIT License
   - ⭐ Stargazers: 2
@@ -32,7 +31,6 @@
   - ⚖️ MIT License
   - ⭐ Stargazers: 1
   - 🍴 Forks: 0
-
 <!-- DETAILED-END -->
 
 
