@@ -37,6 +37,8 @@
 
 <!-- DETAILED-END -->
 
+
+### 📘 Fetching only gists
 <!-- GISTS-START -->
 
 - [20 JavaScript One-Liner Functions You Need to Know](https://gist.github.com/ArsenTech/f9d2b599cb758c889938a8c943860a57)

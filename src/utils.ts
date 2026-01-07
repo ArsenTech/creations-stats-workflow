@@ -96,9 +96,9 @@ export function placeContent(generatedContent: string, commentTagName: string){
           after = file.slice(endIdx);
 
      const updated =
-     `${before}\n\n` +
+     `${before}\n` +
      generatedContent.trim() +
-     `\n\n${after}`;
+     `\n${after}`;
 
      if (process.env.ACT) {
           core.info("Generated content preview:\n================");
