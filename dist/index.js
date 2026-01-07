@@ -31887,25 +31887,25 @@ async function fetchData() {
                 return false;
             return true;
         }).slice(0, parseInt(repoLimit));
-        if (gistTagName.trim() === "") {
-            try {
-                const gistData = await octokit.paginate(octokit.rest.gists.listForUser, {
-                    username,
-                    per_page: parseInt(gistLimit)
-                });
-                await sleep(750);
-                const gists = gistData.filter(gist => gist.public).map(gist => ({
-                    url: gist.html_url,
-                    description: gist.description || "Untitled gist"
-                }));
-                return { repositories: repos, gists };
-            }
-            catch {
-                core.warning("Gists couldn't be fetched (permissions or rate limits). Keeping the previous gists section");
-                return { repositories: repos, gists: "skipped" };
-            }
-        }
         return { repositories: repos, gists: "skipped" };
+    }
+    if (gistTagName.trim() === "") {
+        try {
+            const gistData = await octokit.paginate(octokit.rest.gists.listForUser, {
+                username,
+                per_page: parseInt(gistLimit)
+            });
+            await sleep(750);
+            const gists = gistData.filter(gist => gist.public).map(gist => ({
+                url: gist.html_url,
+                description: gist.description || "Untitled gist"
+            }));
+            return { repositories: "skipped", gists };
+        }
+        catch {
+            core.warning("Gists couldn't be fetched (permissions or rate limits). Keeping the previous gists section");
+            return { repositories: "skipped", gists: "skipped" };
+        }
     }
     return { repositories: "skipped", gists: "skipped" };
 }
