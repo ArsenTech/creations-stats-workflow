@@ -11,11 +11,12 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - `repo-tag-name` option
 - `gist-tag-name` option
 ### Improved
-- The Repoistories and gists fetch feature
-- the Section placement feature
+- The Repoistories and gists fetch feature unifying into 1 logic (inside thr `try...catch` block)
+- The Section placement feature
 ### Removed
 - `include-gists` option
 - `comment-tag-name` option
+- Titles after generating content (like `#### Repositories` or `#### Gists`)
 
 ## [1.0.1] - 2026-01-02
 ### Added
