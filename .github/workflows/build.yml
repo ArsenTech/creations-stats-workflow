@@ -17,7 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Generate Portfolio with Minimal style
+      - name: Generate Repos with Minimal style
         uses: ./
         with:
           github-username: ArsenTech
@@ -25,9 +25,9 @@ jobs:
           target-file: test.md
           repo-tag-name: MINIMAL
           repo-list-design: minimal
-          commit-message: "[AUTOMATED-CHANGE]: Updated Portfolio stats using a minimal design"
+          commit-message: "[AUTOMATED-CHANGE]: Updated Repository stats using a minimal design"
 
-      - name: Generate Portfolio with Detailed style
+      - name: Generate Repos with Detailed style
         uses: ./
         with:
           github-username: ArsenTech
@@ -35,12 +35,12 @@ jobs:
           target-file: test.md
           repo-tag-name: DETAILED
           repo-list-design: detailed
-          commit-message: "[AUTOMATED-CHANGE]: Updated Portfolio stats using a detailed design"
+          commit-message: "[AUTOMATED-CHANGE]: Updated Repository stats using a detailed design"
 
-      - name: Generate Portfolio with Detailed style
+      - name: Generate Gists
         uses: ./
         with:
           github-username: ArsenTech
-          exclusions: ArsenTech,source-codes
           target-file: test.md
+          repo-tag-name: ""
           commit-message: "[AUTOMATED-CHANGE]: Updated Gist stats"
