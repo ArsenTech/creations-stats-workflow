@@ -2,7 +2,7 @@
      <img src=".github/readme-logo.png" alt="Creations Stats" width="120" height="120">
 </p>
 <h1 align="center">Creations Stats</h3>
-<p align="center">A Github Action that generates user's creations (portfolio) stats (Repositories and Gists). Perfect for profile readme customization!</p>
+<p align="center">A GitHub Action that generates the user's portfolio (creations) stats (Repositories and Gists). Perfect for profile readme customization!</p>
 <p align="center">
      <a href="https://github.com/ArsenTech/creations-stats-workflow/issues/new?assignees=&labels=&template=bug_report.md&title=">Report bug</a>
      &nbsp;&middot;&nbsp;
@@ -48,9 +48,9 @@
 </details>
 
 ## About
-The **Creations Stats** Github action helps you get latest repositories (and gists) details, and lets you manage and exclude some repos. That repo is perfect for a Workflow-rich Github Profile Readme to showcase your creations.
+The **Creations Stats** GitHub action helps you retrieve the latest repository details (and Gists) and lets you manage and exclude specific repositories. That repo is perfect for a Workflow-rich GitHub profile Readme to showcase your creations.
 ### Features
-- **Exclusions** - Exclude some Github repos from showing it to a profile readme to make the list cleaner
+- **Exclusions** - Exclude some GitHub repos from showing in the profile readme to make the list cleaner
 - **Repository List Design** - You can choose some designs based on your interest
 ### Design Difference
 > [!NOTE]
@@ -85,14 +85,14 @@ The **Creations Stats** Github action helps you get latest repositories (and gis
 > - `cron: '0 0 * * 0'` (every week)
 > - `cron: '0 0 1 * *'` (every month)
 >
-> Running the workflow too frequently (e.g., hourly) may cause temporary rate limits by the Github API (powered using Octokit). You can always trigger the workflow manually using `workflow_dispatch` whenever needed.
-1. In your GitHub profile repository (repository with same name as your username), add the following comment tags:
+> Running the workflow too frequently (e.g., hourly) may cause temporary rate limits by the GitHub API (powered using Octokit). You can always trigger the workflow manually using `workflow_dispatch` whenever needed.
+1. In your GitHub profile repository (repository with the same name as your username), add the following comment tags:
      ```md
      ## Portfolio
      <!-- CREATIONS-START -->
      <!-- CREATIONS-END -->
      ```
-2. Create a drectory: `.github/workflows`
+2. Create a directory: `.github/workflows`
 3. Create the workflow named `creations.yml` and use the following code:
      ```yaml
      name: Creations workflow
@@ -112,24 +112,24 @@ The **Creations Stats** Github action helps you get latest repositories (and gis
              uses: actions/checkout@v4
 
            - name: Fetch portfolio from Github API
-             uses: ArsenTech/creations-stats-workflow@v1
+             uses: ArsenTech/creations-stats-workflow@v1.0.1
              with:
                github-username: <your-username>
                repo-list-design: detailed
      ```
-4. Replace `<your-username>` with your preferred Github Username.
+4. Replace `<your-username>` with your preferred GitHub username.
 5. Go to **Repository Settings > Actions > General**, then update the "Workflow permissions" to "Read and write permissions", then click on save.
 6. Wait for it to run automatically, or trigger it manually to see the result instantly.
 
 Example: https://github.com/ArsenTech/creations-stats-workflow/blob/main/examples/final-version.yml
 
 ## Options
-This workflow has additional options for customization. The following are the list of  available options:
+This workflow has additional options for customization. The following is the list of available options:
 
 | Option Name        | Type                              | Description                                        | Default Value                    | Required |
 |--------------------|-----------------------------------|----------------------------------------------------|----------------------------------|----------|
 | `github-username`  | String                            | A Github username to show gists and Repositories   | *no default value*               | ✅        |
-| `exclusions`       | String (with `\|` as a separator) | Repos to exclude from showing it                   | *no default value*               | ❌        |
+| `exclusions`       | String (with `,` as a separator) | Repos to exclude from showing it                   | *no default value*               | ❌        |
 | `target-file`      | String                            | Target markdown file to place in the repo          | README.md                        | ❌        |
 | `repo-limit`       | Number                            | Limits how many repos to show                      | 20                               | ❌        |
 | `gist-limit`       | Number                            | Limits how many gists to show                      | 10                               | ❌        |
