@@ -56,7 +56,6 @@ export async function fetchData(): Promise<IResult>{
           }).slice(0, parseInt(repoLimit));
 
           if(gistTagName.trim()===""){
-               throw new Error("test")
                try {
                     const gistData = await octokit.paginate(
                          octokit.rest.gists.listForUser,
