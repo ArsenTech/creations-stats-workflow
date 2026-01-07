@@ -31887,19 +31887,22 @@ async function fetchData() {
     }).slice(0, parseInt(repoLimit));
     if (includeGists) {
         try {
-            const gistData = await octokit.paginate(octokit.rest.gists.listForUser, {
-                username,
-                per_page: parseInt(gistLimit)
-            });
-            await sleep(750);
-            const gists = gistData.filter(gist => gist.public).map(gist => ({
-                url: gist.html_url,
-                description: gist.description || "Untitled gist"
-            }));
-            return { repositories: repos, gists };
+            throw new Error("test");
+            // const gistData = await octokit.paginate(
+            //      octokit.rest.gists.listForUser,
+            //      {
+            //           username,
+            //           per_page: parseInt(gistLimit)
+            //      }
+            // );
+            // await sleep(750);
+            // const gists: IGitGist[] = gistData.filter(gist=>gist.public).map(gist=>({
+            //      url: gist.html_url,
+            //      description: gist.description || "Untitled gist"
+            // }))
+            // return { repositories: repos, gists }
         }
         catch {
-            core.warning("Could not fetch gists (token lacks permission)");
             return { repositories: repos, gists: "skipped" };
         }
     }
@@ -31964,6 +31967,9 @@ function makeList(val, type) {
         `  - 🍴 Forks: ${val.forks}`,
     ].join("\n");
 }
+function hasGists(gists) {
+    return gists !== "skipped";
+}
 
 ;// CONCATENATED MODULE: ./src/index.ts
 
@@ -31974,8 +31980,11 @@ async function run() {
         errorMessage('Repo List design should be either "minimal" or "detailed"');
     const data = await fetchData();
     let markdown = `#### Repositories\n${data.repositories.map(val => makeList(val, repoListDesign)).join("\n")}\n`;
-    if (data.gists !== "skipped") {
+    if (hasGists(data.gists)) {
         markdown += `\n#### Gists\n${data.gists.map(val => `- [${val.description}](${val.url})`).join("\n")}`;
+    }
+    else {
+        core.warning("Could not fetch gists (permissions or a rate limit). Keeping prebious gist section.");
     }
     placeContent(markdown);
     commitAndPush();

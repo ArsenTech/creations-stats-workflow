@@ -55,21 +55,21 @@ export async function fetchData(): Promise<IResult>{
 
      if(includeGists){
           try {
-               const gistData = await octokit.paginate(
-                    octokit.rest.gists.listForUser,
-                    {
-                         username,
-                         per_page: parseInt(gistLimit)
-                    }
-               );
-               await sleep(750);
-               const gists: IGitGist[] = gistData.filter(gist=>gist.public).map(gist=>({
-                    url: gist.html_url,
-                    description: gist.description || "Untitled gist"
-               }))
-               return { repositories: repos, gists }
+               throw new Error("test")
+               // const gistData = await octokit.paginate(
+               //      octokit.rest.gists.listForUser,
+               //      {
+               //           username,
+               //           per_page: parseInt(gistLimit)
+               //      }
+               // );
+               // await sleep(750);
+               // const gists: IGitGist[] = gistData.filter(gist=>gist.public).map(gist=>({
+               //      url: gist.html_url,
+               //      description: gist.description || "Untitled gist"
+               // }))
+               // return { repositories: repos, gists }
           } catch {
-               core.warning("Could not fetch gists (token lacks permission)");
                return { repositories: repos, gists: "skipped" }
           }
      }
@@ -142,4 +142,7 @@ export function makeList(val: IGitRepo, type: "minimal" | "detailed"){
           `  - ⭐ Stargazers: ${val.stars}`,
           `  - 🍴 Forks: ${val.forks}`,
      ].join("\n");
+}
+export function hasGists(gists: IGitGist[] | "skipped"): gists is IGitGist[]{
+     return gists !== "skipped"
 }
