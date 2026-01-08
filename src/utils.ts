@@ -120,7 +120,7 @@ export function commitAndPush(){
      execSync("git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com");
      execSync("git config --global user.name github-actions[bot]");
      if (process.env.GITHUB_TOKEN)
-          execSync(`git remote set-url origin git remote set-url origin https://x-access-token:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`,{ stdio: "inherit" });
+          execSync(`git remote set-url origin https://x-access-token:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`,{ stdio: "inherit" });
      try {
           execSync("git diff --quiet");
           core.info("No changes to commit");
