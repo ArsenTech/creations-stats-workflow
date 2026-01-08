@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Improved
 - The Repoistories and gists fetch feature unifying into 1 logic (inside thr `try...catch` block)
 - The Section placement feature
+- Other Bug Fixes
 ### Removed
 - `include-gists` option
 - `comment-tag-name` option
