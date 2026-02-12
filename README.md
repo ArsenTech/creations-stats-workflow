@@ -185,7 +185,7 @@ Distributed under the MIT License. See [LICENSE.md][license-url] for more inform
 [version-url]: https://github.com/marketplace/actions/creations-stats-workflow
 [dependents-shield]: https://badgen.net/github/dependents-repo/ArsenTech/creations-stats-workflow?icon=github&label=Total%20Users
 [dependents-url]: https://github.com/ArsenTech/creations-stats-workflow/network/dependents
-[status-shield]: https://img.shields.io/github/actions/workflow/status/ArsenTech/creations-stats-workflow/build.yml?color=%2322b455
+[status-shield]: https://img.shields.io/github/actions/workflow/status/ArsenTech/creations-stats-workflow/build.yml
 [status-url]: https://github.com/ArsenTech/creations-stats-workflow/actions/workflows/build.yml
 [commits-since-shield]: https://img.shields.io/github/commits-since/ArsenTech/creations-stats-workflow/latest?color=%2322b455&label=Commits%20since%20latest%20version
 [created-at-shield]: https://img.shields.io/github/created-at/ArsenTech/creations-stats-workflow
