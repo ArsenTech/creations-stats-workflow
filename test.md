@@ -12,23 +12,27 @@
 ### 📘 Detailed Design
 
 <!-- DETAILED-START -->
-- [arsentech.github.io](https://github.com/ArsenTech/arsentech.github.io) - ArsenTech's Official Personal Website
+- [arsentech.github.io](https://github.com/ArsenTech/arsentech.github.io) - 🌐 ArsenTech's Official Personal Website
   - ⚖️ MIT License
   - ⭐ Stargazers: 2
   - 🍴 Forks: 1
-- [blog](https://github.com/ArsenTech/blog) - Cybersecurity, tech tutorials, unique coding projects, and other tech-related posts all in one place: "ArsenTech Blog".
+- [blog](https://github.com/ArsenTech/blog) - 📚 Cybersecurity, tech tutorials, unique coding projects, and other tech-related posts all in one place: "ArsenTech Blog".
   - ⚖️ MIT License
   - ⭐ Stargazers: 1
   - 🍴 Forks: 0
-- [creations-stats-workflow](https://github.com/ArsenTech/creations-stats-workflow) - A Github Action that generates user's portfolio stats (Repositories and Gists). Perfect for profile readme customization!
+- [clamav-gui](https://github.com/ArsenTech/clamav-gui) - 🛡️ A GUI for ClamAV Antivirus that makes the Antivirus itself look professional and work exactly like ClamAV. It's currently in development
+  - ⚖️ GNU General Public License v3.0
+  - ⭐ Stargazers: 3
+  - 🍴 Forks: 0
+- [creations-stats-workflow](https://github.com/ArsenTech/creations-stats-workflow) - 📘 A Github Action that generates user's portfolio stats (Repositories and Gists). Perfect for profile readme customization!
   - ⚖️ MIT License
   - ⭐ Stargazers: 1
   - 🍴 Forks: 0
-- [downloads](https://github.com/ArsenTech/downloads) - Downloads Page of ArsenTech's Website
+- [downloads](https://github.com/ArsenTech/downloads) - 📁 Downloads Page of ArsenTech's Website
   - ⚖️ MIT License
   - ⭐ Stargazers: 3
   - 🍴 Forks: 0
-- [idea-checklist](https://github.com/ArsenTech/idea-checklist) - A checklist app for Tech YouTube Streamers and other people built using React, Tauri, and ShadCN UI
+- [idea-checklist](https://github.com/ArsenTech/idea-checklist) - ⚡ A checklist app for Tech YouTube Streamers and other people built using React, Tauri, and ShadCN UI
   - ⚖️ MIT License
   - ⭐ Stargazers: 1
   - 🍴 Forks: 0
