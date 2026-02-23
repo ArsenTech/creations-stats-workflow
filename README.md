@@ -77,6 +77,9 @@ The **Creations Stats** GitHub action helps you retrieve the latest repository d
 - [![Octokit][octokit-shield]][octokit-url]
 - [![YAML][yaml-shield]][yaml-url]
 
+### Planned Improvements
+- [ ] Migration into GraphQL
+
 ## Usage
 > [!NOTE]
 > The default schedule above runs every 6 hours, which is suitable for most users. You can adjust the schedule based on the frequency:
