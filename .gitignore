@@ -95,3 +95,6 @@ web_modules/
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+.env
+public/sponsors/.cache.json

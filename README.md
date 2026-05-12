@@ -15,6 +15,7 @@
 [![project_license][license-shield]][license-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
+[![sponsors-badge]][sponsors-link]
 
 [![Issues][issues-shield]][issues-url]
 [![build-status][status-shield]][status-url]
@@ -36,6 +37,7 @@
           <li><a href="#usage">Usage</a></li>
           <li><a href="#options">Options</a></li>
           <li><a href="#versioning">Versioning</a></li>
+          <li><a href="#sponsors">Sponsors</a></li>
           <li>
                <a href="#contributing">Contributing</a>
                <ul>
@@ -146,6 +148,10 @@ This workflow has additional options for customization. The following is the lis
 ## Versioning
 This website follows [Semantic Versioning](https://semver.org/). You can view the full [Changelog][changelog-url] for details on each website version.
 
+## Sponsors
+Check out our awesome sponsors! ❤️
+[![Sponsors List][sponsors-list]][sponsors-link]
+
 ## Contributing
 Contributions are Always Welcome! Please read both [Code of Conduct][code-of-conduct-url] and [CONTRIBUTING.md][contributing-url] before contributing.
 ### Top Contributors
@@ -198,6 +204,9 @@ Distributed under the MIT License. See [LICENSE.md][license-url] for more inform
 [changelog-url]: https://github.com/ArsenTech/creations-stats-workflow/blob/main/CHANGELOG.md
 [website-url]: https://arsentech.github.io
 [repo-example-link]: https://github.com/ArsenTech/creations-stats-workflow
+[sponsors-list]: https://raw.githubusercontent.com/ArsenTech/clamav-gui/main/public/sponsors/sponsors.svg
+[sponsors-link]: https://github.com/sponsors/ArsenTech
+[sponsors-badge]: https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86&style=for-the-badge
 
 <!-- Languages -->
 [typescript-shield]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
