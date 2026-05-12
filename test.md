@@ -22,8 +22,8 @@
   - 🍴 Forks: 0
 - [clamav-gui](https://github.com/ArsenTech/clamav-gui) - 🛡️ A GUI for ClamAV Antivirus that makes the Antivirus itself look professional and work exactly like ClamAV
   - ⚖️ GNU General Public License v3.0
-  - ⭐ Stargazers: 5
-  - 🍴 Forks: 0
+  - ⭐ Stargazers: 10
+  - 🍴 Forks: 3
 - [creations-stats-workflow](https://github.com/ArsenTech/creations-stats-workflow) - 📘 A Github Action that generates user's portfolio stats (Repositories and Gists). Perfect for profile readme customization!
   - ⚖️ MIT License
   - ⭐ Stargazers: 1
