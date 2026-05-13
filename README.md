@@ -206,7 +206,7 @@ Distributed under the MIT License. See [LICENSE.md][license-url] for more inform
 [repo-example-link]: https://github.com/ArsenTech/creations-stats-workflow
 [sponsors-list]: https://raw.githubusercontent.com/ArsenTech/clamav-gui/main/public/sponsors/sponsors.svg
 [sponsors-link]: https://github.com/sponsors/ArsenTech
-[sponsors-badge]: https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86&style=for-the-badge
+[sponsors-badge]: https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86
 
 <!-- Languages -->
 [typescript-shield]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
