@@ -19,12 +19,20 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - `comment-tag-name` option
 - Titles after generating content (like `#### Repositories` or `#### Gists`)
 
+[1.0.2]: https://github.com/ArsenTech/creations-stats-workflow/releases/tag/v1.0.2
+
+---
+
 ## [1.0.1] - 2026-01-02
 ### Added
 - The local Github Action run command + some checks
 ### Changed
 - Changed the exclusions separator from `|` to `,`
 - Changed formatting of the **detailed** repository list
+
+[1.0.1]: https://github.com/ArsenTech/creations-stats-workflow/releases/tag/v1.0.1
+
+---
 
 ## [1.0.0] - 2025-12-31
 ### Highlights
@@ -50,6 +58,10 @@ It took ~70 workflow runs to make a successful Github Action like this.
 - Repository List Design
 - Custom comment tag name
 
+[1.0.0]: https://github.com/ArsenTech/creations-stats-workflow/releases/tag/v1
+
+---
+
 ## [0.5.0] - 2025-12-04 (Prototype)
 ### Highlights
 - It's released as a Bash-based prototype
@@ -58,7 +70,4 @@ It took ~70 workflow runs to make a successful Github Action like this.
 - The **Minimal** Repo list item design
 - Feature to add contents in between 2 comment tags
 
-[1.0.2]: https://github.com/ArsenTech/creations-stats-workflow/releases/tag/v1.0.2
-[1.0.1]: https://github.com/ArsenTech/creations-stats-workflow/releases/tag/v1.0.1
-[1.0.0]: https://github.com/ArsenTech/creations-stats-workflow/releases/tag/v1
 [0.5.0]: https://github.com/ArsenTech/creations-stats-workflow/blob/main/examples/prototype.yml
