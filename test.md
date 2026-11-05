@@ -23,8 +23,8 @@
   - 🍴 Forks: 0
 - [clamav-gui](https://github.com/ArsenTech/clamav-gui) - 🛡️ A GUI for ClamAV Antivirus that makes the Antivirus itself look professional and work exactly like ClamAV
   - ⚖️ GNU General Public License v3.0
-  - ⭐ Stargazers: 14
-  - 🍴 Forks: 4
+  - ⭐ Stargazers: 34
+  - 🍴 Forks: 7
 - [creations-stats-workflow](https://github.com/ArsenTech/creations-stats-workflow) - 📘 A Github Action that generates user's portfolio stats (Repositories and Gists). Perfect for profile readme customization!
   - ⚖️ MIT License
   - ⭐ Stargazers: 1
@@ -35,7 +35,7 @@
   - 🍴 Forks: 0
 - [i18n-translator](https://github.com/ArsenTech/i18n-translator) - 🌍 A Universal Translator that helps you localize and translate some apps into your native language
   - ⚖️ Apache License 2.0
-  - ⭐ Stargazers: 0
+  - ⭐ Stargazers: 1
   - 🍴 Forks: 0
 - [idea-checklist](https://github.com/ArsenTech/idea-checklist) - ⚡ A checklist app for Tech YouTube Streamers and other people built using React, Tauri, and ShadCN UI
   - ⚖️ MIT License
