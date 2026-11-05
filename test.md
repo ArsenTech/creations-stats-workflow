@@ -5,7 +5,7 @@
 - [blog](https://github.com/ArsenTech/blog) - ⭐ 1 - 📚 Cybersecurity, tech tutorials, unique coding projects, and other tech-related posts all in one place: "ArsenTech Blog".
 - [clamav-gui](https://github.com/ArsenTech/clamav-gui) - ⭐ 34 - 🛡️ A GUI for ClamAV Antivirus that makes the Antivirus itself look professional and work exactly like ClamAV
 - [creations-stats-workflow](https://github.com/ArsenTech/creations-stats-workflow) - ⭐ 1 - 📘 A Github Action that generates user's portfolio stats (Repositories and Gists). Perfect for profile readme customization!
-- [downloads](https://github.com/ArsenTech/downloads) - ⭐ 3 - 📁 Downloads Page of ArsenTech's Website
+- [downloads](https://github.com/ArsenTech/downloads) - ⭐ 3 - 📁 CDN for supporting the new downloads page of ArsenTech's website
 - [i18n-translator](https://github.com/ArsenTech/i18n-translator) - ⭐ 1 - 🌍 A Universal Translator that helps you localize and translate some apps into your native language
 - [idea-checklist](https://github.com/ArsenTech/idea-checklist) - ⭐ 1 - ⚡ A checklist app for Tech YouTube Streamers and other people built using React, Tauri, and ShadCN UI
 <!-- MINIMAL-END -->
