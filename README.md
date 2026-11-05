@@ -202,7 +202,7 @@ Distributed under the MIT License. See [LICENSE.md][license-url] for more inform
 [code-of-conduct-url]: https://github.com/ArsenTech/creations-stats-workflow/blob/main/CODE_OF_CONDUCT.md
 [contributing-url]: https://github.com/ArsenTech/creations-stats-workflow/blob/main/CONTRIBUTING.md
 [changelog-url]: https://github.com/ArsenTech/creations-stats-workflow/blob/main/CHANGELOG.md
-[website-url]: https://arsentech.github.io
+[website-url]: https://arsentech-yt.vercel.app
 [repo-example-link]: https://github.com/ArsenTech/creations-stats-workflow
 [sponsors-list]: https://raw.githubusercontent.com/ArsenTech/clamav-gui/main/public/sponsors/sponsors.svg
 [sponsors-link]: https://github.com/sponsors/ArsenTech
