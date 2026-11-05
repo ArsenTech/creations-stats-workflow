@@ -29,8 +29,8 @@
   - ⚖️ MIT License
   - ⭐ Stargazers: 1
   - 🍴 Forks: 0
-- [downloads](https://github.com/ArsenTech/downloads) - 📁 Downloads Page of ArsenTech's Website
-  - ⚖️ MIT License
+- [downloads](https://github.com/ArsenTech/downloads) - 📁 CDN for supporting the new downloads page of ArsenTech's website
+  - ⚖️ Unlicensed
   - ⭐ Stargazers: 3
   - 🍴 Forks: 0
 - [i18n-translator](https://github.com/ArsenTech/i18n-translator) - 🌍 A Universal Translator that helps you localize and translate some apps into your native language
